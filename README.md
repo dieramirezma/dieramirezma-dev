@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# dieramirezma.dev
 
-## Getting Started
+Personal portfolio of Diego Nicolas Ramirez Maldonado — software developer specializing in scalable interfaces and performance architecture.
 
-First, run the development server:
+**Live site:** [dieramirezma.dev](https://dieramirezma.dev)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Stack
+
+| Layer         | Technology                             |
+| ------------- | -------------------------------------- |
+| Framework     | Next.js 16 (App Router)                |
+| Language      | TypeScript — strict mode               |
+| Styles        | Tailwind CSS v4                        |
+| Animations    | Framer Motion                          |
+| Data fetching | TanStack Query v5                      |
+| Fonts         | Geist + JetBrains Mono via `next/font` |
+| i18n          | next-intl (EN / ES)                    |
+| Theming       | next-themes (dark default)             |
+| Deploy        | Vercel                                 |
+
+## Features
+
+- **Void aesthetic design system** — "Kinetic Technical": black canvas, electric blue (`#3b82f6`) accents, tight typography
+- **Dark / Light mode** — dark by default, persisted in `localStorage`
+- **Internationalization** — full EN / ES toggle via next-intl
+- **Live Spotify integration** — now-playing widget polling every 30s
+- **Chess stats** — live Lichess and Chess.com ratings via public APIs
+- **Scroll animations** — Framer Motion `fadeInUp` on viewport entry, respects `prefers-reduced-motion`
+- **Pre-commit formatting** — Prettier via lint-staged on every commit
+- **Pre-push linting** — ESLint + TypeScript validation via Husky
+
+## Project structure
+
+```
+src/
+├── app/
+│   ├── [locale]/          # i18n routing (next-intl)
+│   │   ├── layout.tsx
+│   │   └── page.tsx       # Home
+│   └── api/
+│       ├── spotify/now-playing/
+│       └── chess/{lichess,chesscom}/
+├── components/
+│   ├── layout/            # Navbar, Footer, ThemeToggle
+│   ├── home/              # Hero, LiveMetrics, SelectedWorks
+│   └── ui/                # Chip, SectionTitle, Divider
+├── hooks/                 # use-now-playing, use-chess-stats
+├── lib/                   # spotify.ts, chess.ts, utils.ts
+├── types/                 # Shared TypeScript interfaces
+└── messages/              # en.json, es.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Getting started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+cp .env.example .env.local  # fill in your credentials
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+```env
+# Spotify (Authorization Code flow)
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+SPOTIFY_REFRESH_TOKEN=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Chess
+LICHESS_USERNAME=
+CHESSCOM_USERNAME=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# AI Chatbot (optional)
+ANTHROPIC_API_KEY=
 
-## Deploy on Vercel
+# Site
+NEXT_PUBLIC_SITE_URL=https://dieramirezma.dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm dev          # Start dev server
+pnpm build        # Production build
+pnpm lint         # ESLint + TypeScript check
+pnpm format       # Prettier write
+pnpm format:check # Prettier check
+```
+
+## Code conventions
+
+- **No `any`** — TypeScript strict, all types in `src/types/index.ts`
+- **No semicolons** — Prettier enforces `"semi": false`
+- **Single quotes** in TS/JS, double quotes in JSX attributes
+- **Absolute imports** via `@/` alias, never relative `../../`
+- **No barrel `index.ts`** unless the directory has 4+ related exports
+- **No unnecessary comments** — code is self-documenting
+
+---
+
+© 2024 Diego Nicolas Ramirez Maldonado

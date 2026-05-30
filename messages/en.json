@@ -42,6 +42,6 @@
   },
   "footer": {
     "copyright": "© 2024 Diego Nicolas Ramirez Maldonado",
-    "built_with": "Next.js 15 · Framer Motion · Tailwind CSS"
+    "built_with": "Next.js 16 · Framer Motion · Tailwind CSS"
   }
 }
