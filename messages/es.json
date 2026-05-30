@@ -1,20 +1,25 @@
 {
   "nav": {
+    "home": "Inicio",
     "projects": "Proyectos",
     "experience": "Experiencia",
     "about": "Sobre mí",
     "labs": "Labs"
   },
   "hero": {
+    "badge_experience": "2+ Años de Experiencia",
+    "credential": "1er Lugar en Hackathon",
     "tagline": "2+ años construyendo interfaces escalables",
-    "credential": "Ganador de Hackathon",
+    "description": "Desarrollador de software enfocado en construir productos digitales precisos, performantes y visualmente intencionales.",
     "cta_projects": "Ver Proyectos",
     "cta_about": "Sobre mí"
   },
-  "techStack": {
-    "title": "Stack Técnico",
-    "frontend": "Frontend",
-    "backend": "Backend"
+  "liveMetrics": {
+    "title": "Métricas & Stack en Vivo",
+    "frontend": "Frontend Core",
+    "frontend_desc": "Construcción de aplicaciones web accesibles y performantes con herramientas modernas.",
+    "backend": "Backend Ecosystem",
+    "backend_desc": "Arquitectura de APIs escalables y pipelines de datos eficientes."
   },
   "nowPlaying": {
     "title": "Reproduciendo ahora",
@@ -22,7 +27,7 @@
     "via": "vía Spotify"
   },
   "chess": {
-    "title": "Estadísticas de Ajedrez",
+    "title": "Ratings de Ajedrez",
     "games": "partidas",
     "winrate": "Victorias",
     "wins": "V",
@@ -31,11 +36,12 @@
   },
   "selectedWorks": {
     "title": "Proyectos Destacados",
-    "view_project": "Ver Proyecto",
+    "view_all": "Ver todos",
+    "view_project": "Demo",
     "view_source": "Código"
   },
   "footer": {
     "copyright": "© 2024 Diego Nicolas Ramirez Maldonado",
-    "built_with": "Construido con Next.js, Tailwind CSS & Vercel"
+    "built_with": "Next.js 15 · Framer Motion · Tailwind CSS"
   }
 }

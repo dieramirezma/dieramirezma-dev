@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { ThemeToggle } from './theme-toggle'
 
 const NAV_LINKS = [
+  { key: 'home', href: '' },
   { key: 'projects', href: '/projects' },
   { key: 'experience', href: '/experience' },
   { key: 'about', href: '/about' },
@@ -25,7 +26,9 @@ export function Navbar() {
   }
 
   function isActive(href: string) {
-    return pathname.includes(href)
+    const fullPath = `/${locale}${href}`
+    if (href === '') return pathname === fullPath || pathname === `/${locale}`
+    return pathname.startsWith(fullPath)
   }
 
   return (
@@ -33,12 +36,12 @@ export function Navbar() {
       <nav className="mx-auto max-w-[1200px] px-10 h-14 flex items-center justify-between">
         <Link
           href={`/${locale}`}
-          className="font-mono text-sm font-semibold tracking-widest text-[var(--color-text-primary)] hover:text-[var(--color-primary)] transition-colors duration-200"
+          className="font-mono text-sm font-bold tracking-[0.2em] text-[var(--color-text-primary)] hover:text-[var(--color-primary)] transition-colors duration-200"
         >
           DNRM
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map(link => (
             <Link
               key={link.key}
@@ -57,7 +60,7 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <button
             onClick={toggleLocale}
-            className="font-mono text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-200 px-1"
+            className="font-mono text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-200"
           >
             {locale === 'en' ? 'ES' : 'EN'}
           </button>
