@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "experience": "Experience",
+    "about": "About",
+    "labs": "Labs"
+  },
+  "hero": {
+    "tagline": "2+ years building scalable interfaces",
+    "credential": "Hackathon Winner",
+    "cta_projects": "View Projects",
+    "cta_about": "About Me"
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "nowPlaying": {
+    "title": "Now Playing",
+    "not_playing": "Not playing",
+    "via": "via Spotify"
+  },
+  "chess": {
+    "title": "Chess Stats",
+    "games": "games",
+    "winrate": "Win rate",
+    "wins": "W",
+    "losses": "L",
+    "draws": "D"
+  },
+  "selectedWorks": {
+    "title": "Selected Works",
+    "view_project": "View Project",
+    "view_source": "Source"
+  },
+  "footer": {
+    "copyright": "© 2024 Diego Nicolas Ramirez Maldonado",
+    "built_with": "Built with Next.js, Tailwind CSS & Vercel"
+  }
+}

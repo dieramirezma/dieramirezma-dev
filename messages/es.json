@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "about": "Sobre mí",
+    "labs": "Labs"
+  },
+  "hero": {
+    "tagline": "2+ años construyendo interfaces escalables",
+    "credential": "Ganador de Hackathon",
+    "cta_projects": "Ver Proyectos",
+    "cta_about": "Sobre mí"
+  },
+  "techStack": {
+    "title": "Stack Técnico",
+    "frontend": "Frontend",
+    "backend": "Backend"
+  },
+  "nowPlaying": {
+    "title": "Reproduciendo ahora",
+    "not_playing": "Sin reproducción",
+    "via": "vía Spotify"
+  },
+  "chess": {
+    "title": "Estadísticas de Ajedrez",
+    "games": "partidas",
+    "winrate": "Victorias",
+    "wins": "V",
+    "losses": "D",
+    "draws": "E"
+  },
+  "selectedWorks": {
+    "title": "Proyectos Destacados",
+    "view_project": "Ver Proyecto",
+    "view_source": "Código"
+  },
+  "footer": {
+    "copyright": "© 2024 Diego Nicolas Ramirez Maldonado",
+    "built_with": "Construido con Next.js, Tailwind CSS & Vercel"
+  }
+}
