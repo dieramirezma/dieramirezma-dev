@@ -7,10 +7,10 @@ import { ThemeToggle } from './theme-toggle'
 
 const NAV_LINKS = [
   { key: 'home', href: '' },
-  { key: 'projects', href: '/projects' },
-  { key: 'experience', href: '/experience' },
-  { key: 'about', href: '/about' },
-  { key: 'labs', href: '/labs' },
+  { key: 'experience', href: '#experience' },
+  { key: 'work', href: '#work' },
+  { key: 'capabilities', href: '#capabilities' },
+  { key: 'contact', href: '#contact' },
 ] as const
 
 export function Navbar() {
@@ -26,6 +26,7 @@ export function Navbar() {
   }
 
   function isActive(href: string) {
+    if (href.startsWith('#')) return false
     const fullPath = `/${locale}${href}`
     if (href === '') return pathname === fullPath || pathname === `/${locale}`
     return pathname.startsWith(fullPath)
@@ -33,7 +34,10 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/80 backdrop-blur-sm">
-      <nav className="mx-auto max-w-[1200px] px-10 h-14 flex items-center justify-between">
+      <nav
+        className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-5 sm:px-10"
+        aria-label="Primary navigation"
+      >
         <Link
           href={`/${locale}`}
           className="font-mono text-sm font-bold tracking-[0.2em] text-[var(--color-text-primary)] hover:text-[var(--color-primary)] transition-colors duration-200"

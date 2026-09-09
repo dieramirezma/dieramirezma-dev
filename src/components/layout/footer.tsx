@@ -15,17 +15,10 @@ const LinkedInIcon = () => (
   </svg>
 )
 
-const XIcon = () => (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-)
-
 const SOCIAL_LINKS = [
   { icon: LinkedInIcon, href: 'https://linkedin.com/in/dieramirezma', label: 'LinkedIn' },
   { icon: GitHubIcon, href: 'https://github.com/dieramirezma', label: 'GitHub' },
-  { icon: XIcon, href: 'https://twitter.com/dieramirezma', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:diego@dapperglobal.com', label: 'Email' },
+  { icon: Mail, href: 'mailto:dieramirezma.dev@gmail.com', label: 'Email' },
 ]
 
 export function Footer() {
@@ -34,7 +27,7 @@ export function Footer() {
   return (
     <footer className="mt-20">
       <Divider />
-      <div className="mx-auto max-w-[1200px] px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-6 px-5 py-6 sm:px-10 md:flex-row">
         {/* Logo */}
         <span className="font-mono text-sm font-bold tracking-[0.2em] text-[var(--color-text-secondary)]">
           DNRM

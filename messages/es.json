@@ -1,47 +1,86 @@
 {
   "nav": {
     "home": "Inicio",
-    "projects": "Proyectos",
     "experience": "Experiencia",
-    "about": "Sobre mí",
-    "labs": "Labs"
+    "work": "Proyectos",
+    "capabilities": "Capacidades",
+    "contact": "Contacto"
   },
   "hero": {
-    "badge_experience": "2+ Años de Experiencia",
-    "credential": "1er Lugar en Hackathon",
-    "tagline": "2+ años construyendo interfaces escalables",
-    "description": "Desarrollador de software enfocado en construir productos digitales precisos, performantes y visualmente intencionales.",
-    "cta_projects": "Ver Proyectos",
-    "cta_about": "Sobre mí"
+    "eyebrow": "Software Engineer · Bogotá, Colombia",
+    "title": "Construyo productos web escalables con React, Next.js y TypeScript.",
+    "description": "Software Engineer con experiencia full-stack en Python/Django, PostgreSQL, AWS y Docker. Actualmente construyo una plataforma B2B SaaS utilizada en más de 10 mercados de Latinoamérica.",
+    "cta_experience": "Ver experiencia",
+    "cta_github": "Perfil de GitHub",
+    "availability": "Abierto a oportunidades como Software Engineer, Full Stack y Frontend"
   },
-  "liveMetrics": {
-    "title": "Métricas & Stack en Vivo",
-    "frontend": "Frontend Core",
-    "frontend_desc": "Construcción de aplicaciones web accesibles y performantes con herramientas modernas.",
-    "backend": "Backend Ecosystem",
-    "backend_desc": "Arquitectura de APIs escalables y pipelines de datos eficientes."
+  "proof": {
+    "label": "Experiencia en cifras",
+    "markets_value": "10+",
+    "markets_label": "Mercados latinoamericanos",
+    "tests_value": "100+",
+    "tests_label": "Pruebas automatizadas en CI/CD",
+    "architecture_value": "3 → 1",
+    "architecture_label": "Aplicaciones por país consolidadas",
+    "delivery_value": "End-to-end",
+    "delivery_label": "Entrega de proyectos freelance"
   },
-  "nowPlaying": {
-    "title": "Reproduciendo ahora",
-    "not_playing": "Sin reproducción",
-    "via": "vía Spotify"
-  },
-  "chess": {
-    "title": "Ratings de Ajedrez",
-    "games": "partidas",
-    "winrate": "Victorias",
-    "wins": "V",
-    "losses": "D",
-    "draws": "E"
+  "experience": {
+    "title": "Experiencia",
+    "intro": "Trabajo en ingeniería de producto, arquitectura frontend, integraciones API, pruebas y sistemas en producción.",
+    "dapper_role": "Software Engineer",
+    "dapper_date": "Ene 2025 — Actualidad",
+    "dapper_summary": "Construyo experiencias en producción para una plataforma B2B SaaS multi-país con React, Next.js y TypeScript.",
+    "dapper_1": "Lideré en 1 mes la consolidación de 3 aplicaciones específicas por país en una sola base de código guiada por feature flags, apoyando la expansión de 3 a más de 10 mercados.",
+    "dapper_2": "Construí y mantengo una suite de más de 100 pruebas automatizadas con Vitest, integrada a flujos CI/CD con GitHub Actions.",
+    "dapper_3": "Estandaricé integraciones REST type-safe con servicios Django usando Orval y TanStack Query.",
+    "freelance_company": "Independiente",
+    "freelance_role": "Desarrollador Full-Stack Freelance",
+    "freelance_date": "Ene 2024 — Actualidad",
+    "freelance_summary": "Lidero proyectos web de principio a fin: requerimientos, decisiones técnicas, desarrollo, despliegue y comunicación con clientes.",
+    "freelance_1": "Construí una plataforma de e-commerce para Dulce Berlín con Next.js, Django, PostgreSQL y flujos de pago completos con Wompi.",
+    "freelance_2": "Entregué sitios web responsivos en producción para empresas de ingeniería y B2B con Next.js y Astro."
   },
   "selectedWorks": {
-    "title": "Proyectos Destacados",
-    "view_all": "Ver todos",
-    "view_project": "Demo",
-    "view_source": "Código"
+    "title": "Proyectos seleccionados",
+    "intro": "Una selección enfocada en pagos, sistemas cloud-native y entrega rápida de producto.",
+    "repository": "Repositorio",
+    "dulce_context": "Freelance · E-commerce",
+    "dulce_description": "Una experiencia de comercio full-stack para un pequeño negocio, incluyendo widget de pago, webhooks, pagos pendientes y flujos de reembolso.",
+    "fullstyle_context": "Proyecto universitario en equipo",
+    "fullstyle_description": "Una plataforma SaaS para negocios de belleza y cuidado personal, desarrollada con microservicios, autenticación, pagos y orquestación en la nube.",
+    "gemalab_title": "Hackathon Gemalab",
+    "gemalab_context": "Hackathon · 1er lugar",
+    "gemalab_description": "Una plataforma de trazabilidad vegetal que cubre el ciclo desde vivero hasta plantación, entregada con un equipo interdisciplinario bajo una restricción fuerte de tiempo."
+  },
+  "capabilities": {
+    "title": "Capacidades técnicas",
+    "intro": "Mi área más fuerte es la ingeniería frontend moderna, respaldada por experiencia full-stack y cloud.",
+    "frontend": "Ingeniería frontend",
+    "frontend_desc": "Interfaces en producción, arquitectura reutilizable y estado de servidor type-safe.",
+    "fullstack": "Sistemas full-stack",
+    "fullstack_desc": "APIs, modelos de datos, autenticación y flujos de pagos.",
+    "quality": "Calidad y entrega",
+    "quality_desc": "Pruebas automatizadas, CI/CD y sistemas de producción en la nube."
+  },
+  "education": {
+    "title": "Educación y credenciales",
+    "degree": "Ingeniería de Sistemas y Computación",
+    "institution": "Universidad Nacional de Colombia",
+    "details": "Graduado en 2026 · Promedio 4.5/5.0",
+    "credential": "Arquitectura y Calidad de Software",
+    "credential_details": "Universidad Nacional de Colombia · 2025",
+    "forward": "McKinsey.org Forward Program",
+    "forward_details": "McKinsey & Company · 2025"
+  },
+  "contact": {
+    "eyebrow": "Construyamos algo útil",
+    "title": "¿Tienes un rol o proyecto donde esta experiencia pueda ser útil? Hablemos.",
+    "email": "Enviar un correo",
+    "linkedin": "Conectar en LinkedIn"
   },
   "footer": {
-    "copyright": "© 2024 Diego Nicolas Ramirez Maldonado",
-    "built_with": "Next.js 16 · Framer Motion · Tailwind CSS"
+    "copyright": "© 2026 Diego Ramírez",
+    "built_with": "Construido con Next.js · TypeScript · Tailwind CSS"
   }
 }

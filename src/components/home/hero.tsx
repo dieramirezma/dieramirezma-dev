@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useLocale, useTranslations } from 'next-intl'
 import { motion } from 'framer-motion'
-import { ArrowRight, Trophy, Timer } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
+import { ArrowDownRight, ArrowUpRight, MapPin } from 'lucide-react'
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 }
 
 export function Hero() {
@@ -15,67 +15,56 @@ export function Hero() {
   const locale = useLocale()
 
   return (
-    <section className="pt-28 pb-20 px-10 mx-auto max-w-[1200px]">
+    <section className="mx-auto max-w-[1200px] px-5 pb-20 pt-32 sm:px-10 sm:pt-40">
       <motion.div
         initial="hidden"
         animate="visible"
-        variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+        variants={{ visible: { transition: { staggerChildren: 0.09 } } }}
       >
-        {/* Credential badges — inline row */}
-        <motion.div variants={fadeInUp} className="flex items-center gap-3 mb-8 flex-wrap">
-          <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--color-text-secondary)] border border-[var(--color-border)] px-3 py-1 rounded-full">
-            <Timer size={11} className="text-[var(--color-primary)]" />
-            {t('badge_experience')}
-          </span>
-          <span className="text-[var(--color-border)] select-none">·</span>
-          <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--color-text-secondary)] border border-[var(--color-border)] px-3 py-1 rounded-full">
-            <Trophy size={11} className="text-[var(--color-primary)]" />
-            {t('credential')}
-          </span>
-        </motion.div>
-
-        {/* Display headline — name */}
+        <motion.p
+          variants={fadeInUp}
+          className="mb-8 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-primary)]"
+        >
+          <MapPin size={13} aria-hidden="true" /> {t('eyebrow')}
+        </motion.p>
         <motion.h1
           variants={fadeInUp}
-          className="text-[clamp(52px,8vw,96px)] font-bold leading-[1.0] text-[var(--color-text-primary)] mb-3"
-          style={{ letterSpacing: '-0.04em' }}
+          className="max-w-5xl text-[clamp(2.75rem,7vw,5.75rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-[var(--color-text-primary)]"
         >
-          Diego
-          <br />
-          <span className="text-[var(--color-text-secondary)]">Ramirez</span>
+          {t('title')}
         </motion.h1>
-
-        {/* Tagline */}
-        <motion.p
+        <motion.div
           variants={fadeInUp}
-          className="font-mono text-sm text-[var(--color-text-muted)] mb-5 tracking-wide"
+          className="mt-10 grid items-end gap-8 md:grid-cols-[minmax(0,1fr)_auto]"
         >
-          — {t('tagline')}
-        </motion.p>
-
-        {/* Description */}
-        <motion.p
+          <p className="max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+            {t('description')}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href={`/${locale}#experience`}
+              className="inline-flex items-center gap-2 rounded bg-[var(--color-text-primary)] px-5 py-3 text-sm font-medium text-[var(--color-bg)] transition-opacity hover:opacity-85"
+            >
+              {t('cta_experience')} <ArrowDownRight size={15} aria-hidden="true" />
+            </Link>
+            <Link
+              href="https://github.com/dieramirezma"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded border border-[var(--color-border)] px-5 py-3 text-sm text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)]"
+            >
+              {t('cta_github')} <ArrowUpRight size={15} aria-hidden="true" />
+            </Link>
+          </div>
+        </motion.div>
+        <motion.div
           variants={fadeInUp}
-          className="text-base text-[var(--color-text-secondary)] max-w-xl leading-relaxed mb-10"
+          className="mt-12 flex items-center gap-3 border-t border-[var(--color-border)] pt-5"
         >
-          {t('description')}
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div variants={fadeInUp} className="flex items-center gap-3 flex-wrap">
-          <Link
-            href={`/${locale}/projects`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded bg-[var(--color-text-primary)] text-[var(--color-bg)] text-sm font-medium hover:opacity-85 transition-opacity duration-200"
-          >
-            {t('cta_projects')}
-            <ArrowRight size={14} />
-          </Link>
-          <Link
-            href={`/${locale}/about`}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded border border-[var(--color-border)] text-[var(--color-text-secondary)] text-sm font-medium hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)] transition-all duration-200"
-          >
-            {t('cta_about')}
-          </Link>
+          <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" aria-hidden="true" />
+          <p className="font-mono text-[11px] text-[var(--color-text-muted)] sm:text-xs">
+            {t('availability')}
+          </p>
         </motion.div>
       </motion.div>
     </section>

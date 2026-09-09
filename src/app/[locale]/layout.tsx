@@ -6,32 +6,58 @@ import { getMessages } from 'next-intl/server'
 import { QueryProvider } from '@/providers/query-provider'
 import '../globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
+const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
+const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+const STRUCTURED_DATA = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Diego Nicolás Ramírez',
+  url: 'https://dieramirezma.dev',
+  email: 'mailto:dieramirezma.dev@gmail.com',
+  jobTitle: 'Software Engineer',
+  address: { '@type': 'PostalAddress', addressLocality: 'Bogotá', addressCountry: 'CO' },
+  sameAs: ['https://github.com/dieramirezma', 'https://linkedin.com/in/dieramirezma'],
+  worksFor: { '@type': 'Organization', name: 'Dapper' },
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad Nacional de Colombia' },
+}
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://dieramirezma.dev'),
   title: {
-    default: 'Diego Ramirez — Software Developer',
-    template: '%s | Diego Ramirez',
+    default: 'Diego Ramírez — Software Engineer | React, Next.js & TypeScript',
+    template: '%s | Diego Ramírez',
   },
   description:
-    'Software developer specializing in scalable interfaces and performance architecture.',
+    'Software Engineer based in Bogotá building scalable web products with React, Next.js and TypeScript, with full-stack experience in Python/Django, PostgreSQL and AWS.',
+  keywords: [
+    'Software Engineer',
+    'Frontend Engineer',
+    'Full Stack Engineer',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'Python',
+    'Django',
+    'PostgreSQL',
+    'AWS',
+    'Bogotá',
+    'Colombia',
+  ],
+  alternates: { canonical: 'https://dieramirezma.dev' },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://dieramirezma.dev',
-    siteName: 'Diego Ramirez',
+    siteName: 'Diego Ramírez',
+    title: 'Diego Ramírez — Software Engineer',
+    description:
+      'Software Engineer building scalable web products with React, Next.js and TypeScript.',
   },
   twitter: {
     card: 'summary_large_image',
-    creator: '@dieramirezma',
+    title: 'Diego Ramírez — Software Engineer',
+    description: 'React, Next.js and TypeScript specialist with full-stack and cloud experience.',
   },
 }
 
@@ -44,7 +70,6 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
   const messages = await getMessages()
-
   return (
     <html
       lang={locale}
@@ -52,6 +77,12 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(STRUCTURED_DATA).replace(/</g, '\\u003c'),
+          }}
+        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <NextIntlClientProvider messages={messages}>
             <QueryProvider>{children}</QueryProvider>

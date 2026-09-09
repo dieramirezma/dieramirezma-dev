@@ -1,47 +1,86 @@
 {
   "nav": {
     "home": "Home",
-    "projects": "Projects",
     "experience": "Experience",
-    "about": "About",
-    "labs": "Labs"
+    "work": "Selected work",
+    "capabilities": "Capabilities",
+    "contact": "Contact"
   },
   "hero": {
-    "badge_experience": "2+ Years Experience",
-    "credential": "1st Place Hackathon Winner",
-    "tagline": "2+ years building scalable interfaces",
-    "description": "Software developer focused on building precise, performant, and visually intentional digital products.",
-    "cta_projects": "View Projects",
-    "cta_about": "About Me"
+    "eyebrow": "Software Engineer · Bogotá, Colombia",
+    "title": "Building scalable web products with React, Next.js and TypeScript.",
+    "description": "Software Engineer with full-stack experience across Python/Django, PostgreSQL, AWS and Docker. Currently building a B2B SaaS platform used across 10+ Latin American markets.",
+    "cta_experience": "View experience",
+    "cta_github": "GitHub profile",
+    "availability": "Open to Software Engineer, Full Stack and Frontend opportunities"
   },
-  "liveMetrics": {
-    "title": "Live Metrics & Stack",
-    "frontend": "Frontend Core",
-    "frontend_desc": "Building performant, accessible web applications with modern tooling.",
-    "backend": "Backend Ecosystem",
-    "backend_desc": "Architecting scalable APIs and performant data pipelines."
+  "proof": {
+    "label": "Professional proof",
+    "markets_value": "10+",
+    "markets_label": "Latin American markets",
+    "tests_value": "100+",
+    "tests_label": "Automated tests in CI/CD",
+    "architecture_value": "3 → 1",
+    "architecture_label": "Country apps consolidated",
+    "delivery_value": "End-to-end",
+    "delivery_label": "Freelance product delivery"
   },
-  "nowPlaying": {
-    "title": "Now Playing",
-    "not_playing": "Not playing",
-    "via": "via Spotify"
-  },
-  "chess": {
-    "title": "Chess Ratings",
-    "games": "games",
-    "winrate": "Win rate",
-    "wins": "W",
-    "losses": "L",
-    "draws": "D"
+  "experience": {
+    "title": "Experience",
+    "intro": "I work across product engineering, frontend architecture, API integrations, testing and production systems.",
+    "dapper_role": "Software Engineer",
+    "dapper_date": "Jan 2025 — Present",
+    "dapper_summary": "Building production experiences for a multi-country B2B SaaS platform with React, Next.js and TypeScript.",
+    "dapper_1": "Led the consolidation of 3 country-specific applications into one feature-flag-driven codebase in 1 month, supporting expansion from 3 to 10+ markets.",
+    "dapper_2": "Built and maintain a suite of 100+ automated tests with Vitest, integrated into CI/CD workflows with GitHub Actions.",
+    "dapper_3": "Standardized type-safe REST integrations with Django services using Orval and TanStack Query.",
+    "freelance_company": "Independent",
+    "freelance_role": "Freelance Full-Stack Developer",
+    "freelance_date": "Jan 2024 — Present",
+    "freelance_summary": "Owning web projects end-to-end, from requirements and technical decisions to deployment and client communication.",
+    "freelance_1": "Built an e-commerce platform for Dulce Berlín with Next.js, Django, PostgreSQL and end-to-end Wompi payment flows.",
+    "freelance_2": "Delivered responsive production websites for engineering and B2B companies with Next.js and Astro."
   },
   "selectedWorks": {
-    "title": "Selected Works",
-    "view_all": "View all works",
-    "view_project": "Demo",
-    "view_source": "Source Code"
+    "title": "Selected work",
+    "intro": "A focused selection spanning payments, cloud-native systems and rapid product delivery.",
+    "repository": "Repository",
+    "dulce_context": "Freelance · E-commerce",
+    "dulce_description": "A full-stack commerce experience for a small business, including payment widgets, webhooks, pending-payment handling and refund flows.",
+    "fullstyle_context": "University team project",
+    "fullstyle_description": "A SaaS platform for beauty and personal-care businesses, built across a microservices architecture with authentication, payments and cloud orchestration.",
+    "gemalab_title": "Gemalab Hackathon",
+    "gemalab_context": "Hackathon · 1st place",
+    "gemalab_description": "A plant-traceability platform covering the lifecycle from nursery to planting, shipped with an interdisciplinary team under a limited time constraint."
+  },
+  "capabilities": {
+    "title": "Technical capabilities",
+    "intro": "My strongest area is modern frontend engineering, supported by full-stack and cloud experience.",
+    "frontend": "Frontend engineering",
+    "frontend_desc": "Production interfaces, reusable architecture and type-safe server state.",
+    "fullstack": "Full-stack systems",
+    "fullstack_desc": "APIs, data models, authentication and payment workflows.",
+    "quality": "Quality & delivery",
+    "quality_desc": "Automated tests, CI/CD and cloud-based production systems."
+  },
+  "education": {
+    "title": "Education & credentials",
+    "degree": "Systems and Computing Engineering",
+    "institution": "Universidad Nacional de Colombia",
+    "details": "Graduated 2026 · GPA 4.5/5.0",
+    "credential": "Architecture and Software Quality",
+    "credential_details": "Universidad Nacional de Colombia · 2025",
+    "forward": "McKinsey.org Forward Program",
+    "forward_details": "McKinsey & Company · 2025"
+  },
+  "contact": {
+    "eyebrow": "Let’s build something useful",
+    "title": "Have a role or project where this experience could be useful? Let’s talk.",
+    "email": "Send an email",
+    "linkedin": "Connect on LinkedIn"
   },
   "footer": {
-    "copyright": "© 2024 Diego Nicolas Ramirez Maldonado",
-    "built_with": "Next.js 16 · Framer Motion · Tailwind CSS"
+    "copyright": "© 2026 Diego Ramírez",
+    "built_with": "Built with Next.js · TypeScript · Tailwind CSS"
   }
 }
