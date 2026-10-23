@@ -14,7 +14,7 @@ export function EducationContact() {
       >
         <SectionTitle id="education-heading">{education('title')}</SectionTitle>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          <article className="rounded-lg border border-[var(--color-border)] p-6 md:row-span-2">
+          <article className="rounded-lg border border-[var(--color-border)] p-6 md:row-span-3">
             <p className="font-semibold text-[var(--color-text-primary)]">{education('degree')}</p>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
               {education('institution')}
@@ -35,6 +35,12 @@ export function EducationContact() {
             <p className="font-medium text-[var(--color-text-primary)]">{education('forward')}</p>
             <p className="mt-2 text-xs text-[var(--color-text-muted)]">
               {education('forward_details')}
+            </p>
+          </article>
+          <article className="rounded-lg border border-[var(--color-border)] p-6">
+            <p className="font-medium text-[var(--color-text-primary)]">{education('github')}</p>
+            <p className="mt-2 text-xs text-[var(--color-text-muted)]">
+              {education('github_details')}
             </p>
           </article>
         </div>

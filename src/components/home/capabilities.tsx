@@ -15,12 +15,12 @@ const GROUPS = [
   {
     key: 'fullstack',
     icon: Database,
-    stack: ['Python', 'Django', 'Node.js', 'PostgreSQL', 'REST APIs'],
+    stack: ['Python', 'Django', 'FastAPI', 'Node.js', 'PostgreSQL', 'REST APIs'],
   },
   {
     key: 'quality',
     icon: CloudCog,
-    stack: ['Vitest', 'GitHub Actions', 'AWS', 'Docker', 'Kubernetes'],
+    stack: ['Vitest', 'GitHub Actions', 'AWS', 'Google Cloud', 'Docker'],
   },
 ] as const
 

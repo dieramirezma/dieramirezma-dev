@@ -10,7 +10,7 @@ const ROLES = [
     role: 'dapper_role',
     date: 'dapper_date',
     summary: 'dapper_summary',
-    bullets: ['dapper_1', 'dapper_2', 'dapper_3'],
+    bullets: ['dapper_1', 'dapper_2', 'dapper_3', 'dapper_4', 'dapper_5'],
   },
   {
     company: 'freelance_company',

@@ -18,14 +18,20 @@ const PROJECTS = [
     title: 'FullStyle',
     context: 'fullstyle_context',
     description: 'fullstyle_description',
-    stack: ['Next.js', 'TypeScript', 'Flask', 'Go', 'Docker', 'GKE'],
+    stack: ['Next.js', 'TypeScript', 'Flask', 'PostgreSQL', 'Docker', 'Wompi'],
   },
   {
     title: 'gemalab_title',
     context: 'gemalab_context',
     description: 'gemalab_description',
-    stack: ['React', 'Authentication', 'Data flows'],
+    stack: ['Authentication', 'Secure data flow'],
     href: 'https://github.com/dieramirezma/hackathon-nacional-talento-tech',
+  },
+  {
+    title: 'FoodRadar',
+    context: 'foodradar_context',
+    description: 'foodradar_description',
+    stack: ['Android', 'Kotlin', 'OpenStreetMap', 'Gemini AI'],
   },
 ] as const
 
@@ -43,7 +49,7 @@ export function SelectedWorks() {
           {t('intro')}
         </p>
       </div>
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {PROJECTS.map((project, index) => (
           <motion.article
             key={project.title}
