@@ -10,6 +10,7 @@ import {
   RecordBar,
   Unavailable,
 } from '@/components/home/chess-parts'
+import { LiveBoard } from '@/components/home/live-board'
 import { useLichessLive, useLichessStats } from '@/hooks/use-chess-stats'
 import type { ChessMode } from '@/types'
 
@@ -20,7 +21,7 @@ const MODES: { key: ChessMode; label: string }[] = [
   { key: 'classical', label: 'Classical' },
 ]
 
-function LiveGame({ gameId }: { gameId: string }) {
+function LiveGame({ gameId, username }: { gameId: string; username: string }) {
   const t = useTranslations('activity')
 
   return (
@@ -29,12 +30,7 @@ function LiveGame({ gameId }: { gameId: string }) {
         <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--color-error)]" />
         {t('live_game')}
       </p>
-      <iframe
-        src={`https://lichess.org/embed/game/${gameId}?theme=auto&bg=auto`}
-        title={t('live_game')}
-        loading="lazy"
-        className="aspect-[400/444] w-full rounded border border-[var(--color-border)]"
-      />
+      <LiveBoard gameId={gameId} username={username} />
     </div>
   )
 }
@@ -52,7 +48,9 @@ export function LichessStats() {
         <Unavailable />
       ) : (
         <>
-          {live?.playing && live.gameId ? <LiveGame gameId={live.gameId} /> : null}
+          {live?.playing && live.gameId ? (
+            <LiveGame gameId={live.gameId} username={data.username} />
+          ) : null}
           <div className="space-y-3">
             {MODES.map(({ key, label }) => {
               const rating = data.ratings[key]

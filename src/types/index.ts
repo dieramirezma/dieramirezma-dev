@@ -62,6 +62,20 @@ export interface LichessLive {
   gameId?: string
 }
 
+export interface LichessGamePlayer {
+  name: string
+  rating?: number
+}
+
+export interface LichessGameState {
+  fen: string
+  white: LichessGamePlayer
+  black: LichessGamePlayer
+  lastMove?: string
+  whiteClock?: number
+  blackClock?: number
+}
+
 export interface ChessComStats {
   username: string
   url: string
