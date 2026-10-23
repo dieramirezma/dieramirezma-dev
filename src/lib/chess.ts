@@ -1,32 +1,78 @@
-import type { LichessStats, ChessComStats } from '@/types'
+import type { ChessComStats, ChessMode, ChessRating, ChessRecord, LichessStats } from '@/types'
+
+const REVALIDATE = 3600
+const CHESSCOM_HEADERS = {
+  'User-Agent': 'dieramirezma.dev portfolio (https://dieramirezma.dev)',
+}
+
+interface LichessPerf {
+  games: number
+  rating: number
+  prog?: number
+}
+
+interface ChessComMode {
+  last?: { rating: number }
+  best?: { rating: number }
+  record?: { win: number; loss: number; draw: number }
+}
 
 export async function getLichessStats(): Promise<LichessStats | null> {
   const username = process.env.LICHESS_USERNAME
   if (!username) return null
 
+  const token = process.env.LICHESS_API_TOKEN
+
   try {
     const res = await fetch(`https://lichess.org/api/user/${username}`, {
-      headers: { Accept: 'application/json' },
-      next: { revalidate: 3600 },
+      headers: {
+        Accept: 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      next: { revalidate: REVALIDATE },
     })
 
     if (!res.ok) return null
     const data = await res.json()
 
+    const ratings: LichessStats['ratings'] = {}
+    for (const mode of ['bullet', 'blitz', 'rapid', 'classical'] as ChessMode[]) {
+      const perf = data.perfs?.[mode] as LichessPerf | undefined
+      if (perf && perf.games > 0) {
+        ratings[mode] = { rating: perf.rating, games: perf.games, progress: perf.prog }
+      }
+    }
+
+    const record: ChessRecord | undefined = data.count
+      ? { wins: data.count.win, losses: data.count.loss, draws: data.count.draw }
+      : undefined
+
     return {
       username,
-      blitz: data.perfs?.blitz
-        ? { rating: data.perfs.blitz.rating, games: data.perfs.blitz.games }
-        : undefined,
-      rapid: data.perfs?.rapid
-        ? { rating: data.perfs.rapid.rating, games: data.perfs.rapid.games }
-        : undefined,
-      classical: data.perfs?.classical
-        ? { rating: data.perfs.classical.rating, games: data.perfs.classical.games }
-        : undefined,
+      url: data.url ?? `https://lichess.org/@/${username}`,
+      online: Boolean(data.online),
+      ratings,
+      puzzle: data.perfs?.puzzle?.rating,
+      record,
+      hoursPlayed: data.playTime?.total ? Math.round(data.playTime.total / 3600) : undefined,
     }
   } catch {
     return null
+  }
+}
+
+function toChessComRating(mode: ChessComMode | undefined): ChessRating | undefined {
+  if (!mode?.last) return undefined
+  const wins = mode.record?.win ?? 0
+  const losses = mode.record?.loss ?? 0
+  const draws = mode.record?.draw ?? 0
+  return {
+    rating: mode.last.rating,
+    best: mode.best?.rating,
+    games: wins + losses + draws,
+    wins,
+    losses,
+    draws,
   }
 }
 
@@ -34,52 +80,41 @@ export async function getChessComStats(): Promise<ChessComStats | null> {
   const username = process.env.CHESSCOM_USERNAME
   if (!username) return null
 
-  try {
-    const res = await fetch(`https://api.chess.com/pub/player/${username}/stats`, {
-      next: { revalidate: 3600 },
-    })
+  const base = `https://api.chess.com/pub/player/${username.toLowerCase()}`
 
-    if (!res.ok) return null
-    const data = await res.json()
+  try {
+    const [statsRes, profileRes] = await Promise.all([
+      fetch(`${base}/stats`, { headers: CHESSCOM_HEADERS, next: { revalidate: REVALIDATE } }),
+      fetch(base, { headers: CHESSCOM_HEADERS, next: { revalidate: REVALIDATE } }),
+    ])
+
+    if (!statsRes.ok) return null
+    const data = await statsRes.json()
+    const profile = profileRes.ok ? await profileRes.json() : null
+
+    const ratings: ChessComStats['ratings'] = {
+      bullet: toChessComRating(data.chess_bullet),
+      blitz: toChessComRating(data.chess_blitz),
+      rapid: toChessComRating(data.chess_rapid),
+    }
+
+    const played = Object.values(ratings).filter((r): r is ChessRating => Boolean(r))
+    const record: ChessRecord | undefined = played.length
+      ? {
+          wins: played.reduce((sum, r) => sum + (r.wins ?? 0), 0),
+          losses: played.reduce((sum, r) => sum + (r.losses ?? 0), 0),
+          draws: played.reduce((sum, r) => sum + (r.draws ?? 0), 0),
+        }
+      : undefined
 
     return {
       username,
-      blitz: data.chess_blitz?.last
-        ? {
-            rating: data.chess_blitz.last.rating,
-            games:
-              data.chess_blitz.record.win +
-              data.chess_blitz.record.loss +
-              data.chess_blitz.record.draw,
-            wins: data.chess_blitz.record.win,
-            losses: data.chess_blitz.record.loss,
-            draws: data.chess_blitz.record.draw,
-          }
-        : undefined,
-      rapid: data.chess_rapid?.last
-        ? {
-            rating: data.chess_rapid.last.rating,
-            games:
-              data.chess_rapid.record.win +
-              data.chess_rapid.record.loss +
-              data.chess_rapid.record.draw,
-            wins: data.chess_rapid.record.win,
-            losses: data.chess_rapid.record.loss,
-            draws: data.chess_rapid.record.draw,
-          }
-        : undefined,
-      bullet: data.chess_bullet?.last
-        ? {
-            rating: data.chess_bullet.last.rating,
-            games:
-              data.chess_bullet.record.win +
-              data.chess_bullet.record.loss +
-              data.chess_bullet.record.draw,
-            wins: data.chess_bullet.record.win,
-            losses: data.chess_bullet.record.loss,
-            draws: data.chess_bullet.record.draw,
-          }
-        : undefined,
+      url: profile?.url ?? `https://www.chess.com/member/${username}`,
+      followers: profile?.followers,
+      ratings,
+      puzzle: data.tactics?.highest?.rating,
+      puzzleRush: data.puzzle_rush?.best?.score,
+      record,
     }
   } catch {
     return null

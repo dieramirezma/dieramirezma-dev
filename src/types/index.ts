@@ -6,6 +6,27 @@ export interface NowPlayingData {
   artist?: string
   albumArt?: string
   songUrl?: string
+  playedAt?: string
+}
+
+export type SpotifyRange = 'short_term' | 'medium_term' | 'long_term'
+
+export interface SpotifyTrack {
+  title: string
+  artist: string
+  albumArt?: string
+  url: string
+}
+
+export interface SpotifyArtist {
+  name: string
+  image?: string
+  url: string
+}
+
+export interface SpotifyTopData {
+  tracks: SpotifyTrack[]
+  artists: SpotifyArtist[]
 }
 
 export interface ChessRating {
@@ -14,20 +35,36 @@ export interface ChessRating {
   wins?: number
   losses?: number
   draws?: number
+  progress?: number
+  best?: number
 }
+
+export interface ChessRecord {
+  wins: number
+  losses: number
+  draws: number
+}
+
+export type ChessMode = 'bullet' | 'blitz' | 'rapid' | 'classical'
 
 export interface LichessStats {
   username: string
-  blitz?: ChessRating
-  rapid?: ChessRating
-  classical?: ChessRating
+  url: string
+  online: boolean
+  ratings: Partial<Record<ChessMode, ChessRating>>
+  puzzle?: number
+  record?: ChessRecord
+  hoursPlayed?: number
 }
 
 export interface ChessComStats {
   username: string
-  blitz?: ChessRating
-  rapid?: ChessRating
-  bullet?: ChessRating
+  url: string
+  followers?: number
+  ratings: Partial<Record<Exclude<ChessMode, 'classical'>, ChessRating>>
+  puzzle?: number
+  puzzleRush?: number
+  record?: ChessRecord
 }
 
 export interface Project {

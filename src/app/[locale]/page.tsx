@@ -5,6 +5,7 @@ import { ProfessionalProof } from '@/components/home/professional-proof'
 import { Experience } from '@/components/home/experience'
 import { SelectedWorks } from '@/components/home/selected-works'
 import { Capabilities } from '@/components/home/capabilities'
+import { Activity } from '@/components/home/activity'
 import { EducationContact } from '@/components/home/education-contact'
 import { Divider } from '@/components/ui/divider'
 
@@ -22,6 +23,8 @@ export default function HomePage() {
         <SelectedWorks />
         <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
         <Capabilities />
+        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
+        <Activity />
         <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
         <EducationContact />
       </main>
