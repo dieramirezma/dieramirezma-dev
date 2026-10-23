@@ -9,7 +9,7 @@
   "hero": {
     "eyebrow": "Software Engineer · Bogotá, Colombia",
     "title": "Building scalable web products with React, Next.js and TypeScript.",
-    "description": "Software Engineer with full-stack experience across Python/Django, PostgreSQL, AWS and Docker. Currently building a B2B SaaS platform used across 10+ Latin American markets.",
+    "description": "Software Engineer with full-stack experience across Python (Django, FastAPI), PostgreSQL, AWS, Google Cloud and Docker. Currently building a B2B SaaS regulatory-intelligence platform used across 10+ Latin American markets.",
     "cta_experience": "View experience",
     "cta_github": "GitHub profile",
     "availability": "Open to Software Engineer, Full Stack and Frontend opportunities"
@@ -27,41 +27,46 @@
   },
   "experience": {
     "title": "Experience",
-    "intro": "I work across product engineering, frontend architecture, API integrations, testing and production systems.",
+    "intro": "I work across frontend, backend, databases, testing, CI/CD and cloud infrastructure.",
     "dapper_role": "Software Engineer",
     "dapper_date": "Jan 2025 — Present",
-    "dapper_summary": "Building production experiences for a multi-country B2B SaaS platform with React, Next.js and TypeScript.",
-    "dapper_1": "Led the consolidation of 3 country-specific applications into one feature-flag-driven codebase in 1 month, supporting expansion from 3 to 10+ markets.",
-    "dapper_2": "Built and maintain a suite of 100+ automated tests with Vitest, integrated into CI/CD workflows with GitHub Actions.",
-    "dapper_3": "Standardized type-safe REST integrations with Django services using Orval and TanStack Query.",
+    "dapper_summary": "Full-stack engineer on a B2B SaaS regulatory intelligence and public affairs platform used across 10+ Latin American markets.",
+    "dapper_1": "Led the consolidation of 3 country-specific applications into one configuration- and feature-flag-driven multi-country architecture in about a month, contributing to growth from 3 to 10+ markets in roughly 6 months.",
+    "dapper_2": "Built and maintain 100+ automated tests with Vitest and React Testing Library, integrated with GitHub Actions CI/CD (~97% line coverage in a project measurement).",
+    "dapper_3": "Built type-safe REST integrations with Orval and TanStack Query, and authentication with NextAuth and JWT.",
     "freelance_company": "Independent",
     "freelance_role": "Freelance Full-Stack Developer",
     "freelance_date": "Jan 2024 — Present",
-    "freelance_summary": "Owning web projects end-to-end, from requirements and technical decisions to deployment and client communication.",
-    "freelance_1": "Built an e-commerce platform for Dulce Berlín with Next.js, Django, PostgreSQL and end-to-end Wompi payment flows.",
-    "freelance_2": "Delivered responsive production websites for engineering and B2B companies with Next.js and Astro."
+    "freelance_summary": "Building websites and applications for small businesses end-to-end, from requirements to frontend, backend, API integration and deployment.",
+    "freelance_1": "Built an e-commerce solution for Dulce Berlín with Next.js, Django and PostgreSQL, integrating the Wompi payment widget, webhooks, payment states and refund flows.",
+    "freelance_2": "Delivered websites and web apps with React, Next.js, TypeScript, Astro, Python and Django.",
+    "dapper_4": "Develop Python backend services with Django and FastAPI on PostgreSQL, including a social listening pipeline that uses Apify and Gemini for relevance and sentiment analysis.",
+    "dapper_5": "Operate infrastructure on AWS (ECS Fargate, RDS, S3, Lambda, IAM, Secrets Manager, ECR) and Google Cloud (Cloud Run, Cloud Storage), and debug production issues."
   },
   "selectedWorks": {
     "title": "Selected work",
-    "intro": "A focused selection spanning payments, cloud-native systems and rapid product delivery.",
+    "intro": "A focused selection spanning payments, security, mobile and rapid product delivery.",
     "repository": "Repository",
     "dulce_context": "Freelance · E-commerce",
-    "dulce_description": "A full-stack commerce experience for a small business, including payment widgets, webhooks, pending-payment handling and refund flows.",
-    "fullstyle_context": "University team project",
-    "fullstyle_description": "A SaaS platform for beauty and personal-care businesses, built across a microservices architecture with authentication, payments and cloud orchestration.",
+    "dulce_description": "End-to-end e-commerce for a small business, including the Wompi payment widget, webhooks, payment-state handling and refund flows.",
+    "fullstyle_context": "University team project · 2024–2025",
+    "fullstyle_description": "Team project with a Next.js frontend and Flask REST APIs on PostgreSQL, featuring Wompi payments, refunds, cancellations, Google OAuth, 2FA and CAPTCHA.",
     "gemalab_title": "Gemalab Hackathon",
     "gemalab_context": "Hackathon · 1st place",
-    "gemalab_description": "A plant-traceability platform covering the lifecycle from nursery to planting, shipped with an interdisciplinary team under a limited time constraint."
+    "gemalab_description": "A plant lifecycle traceability platform built with an interdisciplinary team, with authentication and secure information flow.",
+    "foodradar_title": "FoodRadar",
+    "foodradar_context": "Academic project · Mobile",
+    "foodradar_description": "Android app built by a team of four, using Kotlin, OpenStreetMap and Gemini AI (Oct–Dec 2025)."
   },
   "capabilities": {
     "title": "Technical capabilities",
-    "intro": "My strongest area is modern frontend engineering, supported by full-stack and cloud experience.",
+    "intro": "My strongest area is modern frontend engineering, backed by full-stack Python and cloud experience.",
     "frontend": "Frontend engineering",
     "frontend_desc": "Production interfaces, reusable architecture and type-safe server state.",
     "fullstack": "Full-stack systems",
-    "fullstack_desc": "APIs, data models, authentication and payment workflows.",
+    "fullstack_desc": "Python APIs, data models, authentication, file storage and payment workflows.",
     "quality": "Quality & delivery",
-    "quality_desc": "Automated tests, CI/CD and cloud-based production systems."
+    "quality_desc": "Automated tests, CI/CD, containers and production systems on AWS and Google Cloud."
   },
   "education": {
     "title": "Education & credentials",
@@ -69,9 +74,11 @@
     "institution": "Universidad Nacional de Colombia",
     "details": "Graduated 2026 · GPA 4.5/5.0",
     "credential": "Architecture and Software Quality",
-    "credential_details": "Universidad Nacional de Colombia · 2025",
-    "forward": "McKinsey.org Forward Program",
-    "forward_details": "McKinsey & Company · 2025"
+    "credential_details": "Universidad Nacional de Colombia",
+    "forward": "AWS Academy Cloud Foundations",
+    "forward_details": "AWS Academy",
+    "github": "GitHub Foundations",
+    "github_details": "GitHub"
   },
   "contact": {
     "eyebrow": "Let’s build something useful",
@@ -82,5 +89,25 @@
   "footer": {
     "copyright": "© 2026 Diego Ramírez",
     "built_with": "Built with Next.js · TypeScript · Tailwind CSS"
+  },
+  "activity": {
+    "title": "Beyond the code",
+    "intro": "Live data from the things I do outside of work: music on Spotify and chess on Lichess and Chess.com.",
+    "unavailable": "Data unavailable right now.",
+    "now_playing": "Now playing",
+    "last_played": "Last played",
+    "not_playing": "Nothing playing right now.",
+    "top_tracks": "Top tracks",
+    "top_artists": "Top artists",
+    "range_short_term": "4 weeks",
+    "range_medium_term": "6 months",
+    "range_long_term": "12 months",
+    "games": "games",
+    "best": "best",
+    "winrate": "Win rate",
+    "puzzles": "Puzzle rating",
+    "puzzle_rush": "Puzzle Rush best",
+    "followers": "Followers",
+    "hours_played": "Hours played"
   }
 }
