@@ -108,6 +108,7 @@
     "puzzles": "Rating de puzzles",
     "puzzle_rush": "Mejor Puzzle Rush",
     "followers": "Seguidores",
-    "hours_played": "Horas jugadas"
+    "hours_played": "Horas jugadas",
+    "live_game": "Partida en vivo en Lichess"
   }
 }

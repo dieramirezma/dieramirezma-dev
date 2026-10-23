@@ -1,4 +1,11 @@
-import type { ChessComStats, ChessMode, ChessRating, ChessRecord, LichessStats } from '@/types'
+import type {
+  ChessComStats,
+  ChessMode,
+  ChessRating,
+  ChessRecord,
+  LichessLive,
+  LichessStats,
+} from '@/types'
 
 const REVALIDATE = 3600
 const CHESSCOM_HEADERS = {
@@ -58,6 +65,26 @@ export async function getLichessStats(): Promise<LichessStats | null> {
     }
   } catch {
     return null
+  }
+}
+
+export async function getLichessLive(): Promise<LichessLive> {
+  const username = process.env.LICHESS_USERNAME
+  if (!username) return { playing: false }
+
+  try {
+    const res = await fetch(
+      `https://lichess.org/api/users/status?ids=${encodeURIComponent(username)}&withGameIds=true`,
+      { headers: { Accept: 'application/json' }, cache: 'no-store' }
+    )
+    if (!res.ok) return { playing: false }
+
+    const [status] = (await res.json()) as { playing?: boolean; playingId?: string }[]
+    if (!status?.playing || !status.playingId) return { playing: false }
+
+    return { playing: true, gameId: status.playingId }
+  } catch {
+    return { playing: false }
   }
 }
 

@@ -57,6 +57,11 @@ export interface LichessStats {
   hoursPlayed?: number
 }
 
+export interface LichessLive {
+  playing: boolean
+  gameId?: string
+}
+
 export interface ChessComStats {
   username: string
   url: string

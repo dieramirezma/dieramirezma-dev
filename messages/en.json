@@ -108,6 +108,7 @@
     "puzzles": "Puzzle rating",
     "puzzle_rush": "Puzzle Rush best",
     "followers": "Followers",
-    "hours_played": "Hours played"
+    "hours_played": "Hours played",
+    "live_game": "Live game on Lichess"
   }
 }

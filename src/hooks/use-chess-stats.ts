@@ -1,7 +1,7 @@
 'use client'
 
 import { useQuery } from '@tanstack/react-query'
-import type { LichessStats, ChessComStats } from '@/types'
+import type { LichessStats, LichessLive, ChessComStats } from '@/types'
 
 async function fetchLichess(): Promise<LichessStats | null> {
   const res = await fetch('/api/chess/lichess')
@@ -20,6 +20,21 @@ export function useLichessStats() {
     queryKey: ['chess-lichess'],
     queryFn: fetchLichess,
     staleTime: 3600 * 1000,
+  })
+}
+
+async function fetchLichessLive(): Promise<LichessLive> {
+  const res = await fetch('/api/chess/lichess/live')
+  if (!res.ok) return { playing: false }
+  return res.json()
+}
+
+export function useLichessLive() {
+  return useQuery({
+    queryKey: ['chess-lichess-live'],
+    queryFn: fetchLichessLive,
+    refetchInterval: 20000,
+    staleTime: 15000,
   })
 }
 
