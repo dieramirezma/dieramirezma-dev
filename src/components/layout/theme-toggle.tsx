@@ -1,24 +1,61 @@
 'use client'
 
-import { useTheme } from 'next-themes'
-import { Sun, Moon } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { useTranslations } from 'next-intl'
+import { Moon, Sun } from 'lucide-react'
+
+const FALLBACK_MS = 400
+
+function applyThemeClass(theme: 'light' | 'dark') {
+  const root = document.documentElement
+  root.classList.toggle('dark', theme === 'dark')
+  root.classList.toggle('light', theme === 'light')
+  root.style.colorScheme = theme
+}
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const t = useTranslations('nav')
+  const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
 
-  if (!mounted) return <div className="w-8 h-8" />
+  if (!mounted) return <div className="h-8 w-8" aria-hidden="true" />
+
+  const isDark = resolvedTheme === 'dark'
+
+  function toggle() {
+    const next = isDark ? 'light' : 'dark'
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (reduceMotion) {
+      setTheme(next)
+      return
+    }
+
+    if (typeof document.startViewTransition === 'function') {
+      document.startViewTransition(() => {
+        applyThemeClass(next)
+        setTheme(next)
+      })
+      return
+    }
+
+    const root = document.documentElement
+    root.classList.add('theme-transition')
+    setTheme(next)
+    window.setTimeout(() => root.classList.remove('theme-transition'), FALLBACK_MS)
+  }
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="flex items-center justify-center w-8 h-8 rounded text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-200"
-      aria-label="Toggle theme"
+      type="button"
+      onClick={toggle}
+      className="flex h-8 w-8 items-center justify-center text-muted transition-colors hover:text-fg"
+      aria-label={t('toggle_theme')}
     >
-      {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+      {isDark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
     </button>
   )
 }

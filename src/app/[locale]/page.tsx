@@ -1,32 +1,27 @@
+import { setRequestLocale } from 'next-intl/server'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { Hero } from '@/components/home/hero'
-import { ProfessionalProof } from '@/components/home/professional-proof'
+import { WorkIndex } from '@/components/home/work-index'
 import { Experience } from '@/components/home/experience'
-import { SelectedWorks } from '@/components/home/selected-works'
 import { Capabilities } from '@/components/home/capabilities'
 import { Activity } from '@/components/home/activity'
-import { EducationContact } from '@/components/home/education-contact'
-import { Divider } from '@/components/ui/divider'
+import { Contact } from '@/components/home/contact'
 
-export default function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  setRequestLocale(locale)
+
   return (
     <>
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
-        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
-        <ProfessionalProof />
-        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
         <Experience />
-        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
-        <SelectedWorks />
-        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
+        <WorkIndex />
         <Capabilities />
-        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
+        <Contact />
         <Activity />
-        <Divider className="mx-10 max-w-[1200px] md:mx-auto" />
-        <EducationContact />
       </main>
       <Footer />
     </>

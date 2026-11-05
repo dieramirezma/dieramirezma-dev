@@ -1,80 +1,96 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { SectionTitle } from '@/components/ui/section-title'
+import { Reveal } from '@/components/ui/reveal'
 
 const ROLES = [
   {
-    company: 'Dapper',
-    role: 'dapper_role',
-    date: 'dapper_date',
-    summary: 'dapper_summary',
-    bullets: ['dapper_1', 'dapper_2', 'dapper_3', 'dapper_4', 'dapper_5'],
+    key: 'dapper',
+    visible: ['dapper_1', 'dapper_2', 'dapper_3'],
+    more: ['dapper_4', 'dapper_5'],
+    stack: [
+      'React',
+      'Next.js',
+      'TypeScript',
+      'Python',
+      'Django',
+      'PostgreSQL',
+      'AWS',
+      'Vitest',
+      'GitHub Actions',
+      'FastAPI',
+    ],
   },
   {
-    company: 'freelance_company',
-    role: 'freelance_role',
-    date: 'freelance_date',
-    summary: 'freelance_summary',
-    bullets: ['freelance_1', 'freelance_2'],
+    key: 'freelance',
+    visible: ['freelance_1', 'freelance_2'],
+    more: [],
+    stack: ['Next.js', 'Astro', 'React', 'Django', 'PostgreSQL', 'Wompi'],
   },
 ] as const
 
 export function Experience() {
   const t = useTranslations('experience')
+
   return (
-    <section
-      id="experience"
-      aria-labelledby="experience-heading"
-      className="scroll-mt-24 mx-auto max-w-[1200px] px-5 py-20 sm:px-10"
-    >
-      <div className="mb-10 max-w-2xl">
-        <SectionTitle id="experience-heading">{t('title')}</SectionTitle>
-        <p className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)] sm:text-base">
-          {t('intro')}
-        </p>
-      </div>
-      <div className="divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
-        {ROLES.map((item, index) => (
-          <motion.article
-            key={item.role}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ delay: index * 0.08 }}
-            className="grid gap-6 py-8 md:grid-cols-[220px_minmax(0,1fr)] md:py-10"
-          >
-            <div>
-              <p className="font-semibold text-[var(--color-text-primary)]">
-                {item.company === 'Dapper' ? item.company : t(item.company)}
-              </p>
-              <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{t(item.role)}</p>
-              <p className="mt-2 font-mono text-[11px] text-[var(--color-text-muted)]">
-                {t(item.date)}
-              </p>
-            </div>
-            <div>
-              <p className="max-w-3xl leading-relaxed text-[var(--color-text-secondary)]">
-                {t(item.summary)}
-              </p>
-              <ul className="mt-5 space-y-3">
-                {item.bullets.map(bullet => (
-                  <li
-                    key={bullet}
-                    className="flex gap-3 text-sm leading-relaxed text-[var(--color-text-muted)]"
-                  >
-                    <span
-                      className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--color-primary)]"
-                      aria-hidden="true"
-                    />{' '}
-                    {t(bullet)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.article>
-        ))}
+    <section id="experience" aria-labelledby="experience-heading" className="section">
+      <div className="page">
+        <h2 id="experience-heading" className="meta">
+          {t('label')}
+        </h2>
+
+        <div className="mt-6">
+          {ROLES.map(role => (
+            <Reveal key={role.key}>
+              <article className="editorial-grid border-t border-rule py-10 md:py-12">
+                <div className="margin">
+                  <p className="meta text-fg">{t(`${role.key}_date`)}</p>
+                  <p className="meta mt-2">{t(`${role.key}_meta`)}</p>
+                </div>
+                <div className="main">
+                  <h3 className="title">{t(`${role.key}_company`)}</h3>
+                  <p className="mt-2 text-lg text-fg">{t(`${role.key}_role`)}</p>
+                  <p className="mt-6 max-w-[60ch] text-muted">{t(`${role.key}_summary`)}</p>
+
+                  <ul className="mt-8 max-w-[68ch] space-y-5">
+                    {role.visible.map(bullet => (
+                      <li key={bullet} className="flex gap-4">
+                        <span
+                          aria-hidden="true"
+                          className="mt-[0.7em] h-px w-4 shrink-0 bg-accent"
+                        />
+                        <span>{t(bullet)}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {role.more.length > 0 ? (
+                    <details className="group mt-6 max-w-[68ch]">
+                      <summary className="link-underline-static link-underline inline-block cursor-pointer font-mono text-xs uppercase tracking-[0.08em] text-muted hover:text-accent">
+                        <span className="group-open:hidden">+ {t('full_detail')}</span>
+                        <span className="hidden group-open:inline">− {t('full_detail')}</span>
+                      </summary>
+                      <ul className="mt-5 space-y-5">
+                        {role.more.map(bullet => (
+                          <li key={bullet} className="flex gap-4">
+                            <span
+                              aria-hidden="true"
+                              className="mt-[0.7em] h-px w-4 shrink-0 bg-rule-strong"
+                            />
+                            <span>{t(bullet)}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  ) : null}
+
+                  <p className="mt-8 font-mono text-xs leading-relaxed text-subtle">
+                    <span className="uppercase tracking-[0.08em]">{t('stack')}</span> —{' '}
+                    {role.stack.join(' · ')}
+                  </p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )
