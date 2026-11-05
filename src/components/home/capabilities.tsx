@@ -1,70 +1,83 @@
-'use client'
-
-import { motion } from 'framer-motion'
 import { useTranslations } from 'next-intl'
-import { CloudCog, Code2, Database } from 'lucide-react'
-import { SectionTitle } from '@/components/ui/section-title'
-import { Chip } from '@/components/ui/chip'
+import { Reveal } from '@/components/ui/reveal'
 
 const GROUPS = [
   {
-    key: 'frontend',
-    icon: Code2,
-    stack: ['React', 'Next.js', 'TypeScript', 'TanStack Query', 'Tailwind CSS'],
+    key: 'interfaces',
+    primary: ['React', 'Next.js', 'TypeScript'],
+    secondary: ['TanStack Query', 'Tailwind CSS', 'Orval'],
+    supporting: ['Astro', 'Shadcn UI'],
   },
   {
-    key: 'fullstack',
-    icon: Database,
-    stack: ['Python', 'Django', 'FastAPI', 'Node.js', 'PostgreSQL', 'REST APIs'],
+    key: 'systems',
+    primary: ['Python', 'Django', 'PostgreSQL'],
+    secondary: ['Node.js', 'REST APIs'],
+    supporting: ['FastAPI', 'Flask', 'Go', 'NextAuth'],
   },
   {
-    key: 'quality',
-    icon: CloudCog,
-    stack: ['Vitest', 'GitHub Actions', 'AWS', 'Google Cloud', 'Docker'],
+    key: 'delivery',
+    primary: ['AWS', 'Docker', 'GitHub Actions'],
+    secondary: ['Vitest', 'React Testing Library'],
+    supporting: ['Google Cloud', 'Kubernetes / GKE'],
   },
+] as const
+
+const CREDENTIALS = [
+  ['degree', 'degree_meta'],
+  ['cred_1', 'cred_1_meta'],
+  ['cred_2', 'cred_2_meta'],
+  ['cred_3', 'cred_3_meta'],
 ] as const
 
 export function Capabilities() {
   const t = useTranslations('capabilities')
+  const about = useTranslations('about')
+
   return (
-    <section
-      id="capabilities"
-      aria-labelledby="capabilities-heading"
-      className="scroll-mt-24 mx-auto max-w-[1200px] px-5 py-20 sm:px-10"
-    >
-      <div className="mb-10 max-w-2xl">
-        <SectionTitle id="capabilities-heading">{t('title')}</SectionTitle>
-        <p className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)] sm:text-base">
-          {t('intro')}
-        </p>
-      </div>
-      <div className="grid gap-px overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-border)] lg:grid-cols-3">
-        {GROUPS.map((group, index) => {
-          const Icon = group.icon
-          return (
-            <motion.article
+    <section id="about" aria-labelledby="capabilities-heading" className="section">
+      <div className="page">
+        <div className="editorial-grid">
+          <h2 id="capabilities-heading" className="meta margin">
+            {about('label')}
+          </h2>
+          <p className="lead main max-w-[56ch]">{about('body_1')}</p>
+        </div>
+
+        <div className="mt-12 grid gap-px border-y border-rule bg-rule md:mt-20 lg:grid-cols-3">
+          {GROUPS.map((group, index) => (
+            <Reveal
               key={group.key}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              className="bg-[var(--color-surface-1)] p-6 sm:p-8"
+              delay={index * 0.08}
+              className="bg-bg py-8 lg:px-8 lg:first:pl-0 lg:last:pr-0"
             >
-              <Icon size={20} className="text-[var(--color-primary)]" aria-hidden="true" />
-              <h3 className="mt-5 font-semibold text-[var(--color-text-primary)]">
-                {t(group.key)}
-              </h3>
-              <p className="mt-2 min-h-12 text-sm leading-relaxed text-[var(--color-text-muted)]">
-                {t(`${group.key}_desc`)}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {group.stack.map(tech => (
-                  <Chip key={tech}>{tech}</Chip>
+              <h3 className="meta text-fg">{t(group.key)}</h3>
+              <ul className="mt-4 space-y-0.5 font-display text-2xl leading-snug">
+                {group.primary.map(item => (
+                  <li key={item}>{item}</li>
                 ))}
+              </ul>
+              <p className="mt-4 text-base text-muted">{group.secondary.join(' · ')}</p>
+              <p className="mt-3 font-mono text-xs leading-relaxed text-subtle">
+                {group.supporting.join(' · ')}
+              </p>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="editorial-grid mt-14 md:mt-20">
+          <h3 className="meta margin">{about('education_label')}</h3>
+          <dl className="main border-t border-rule">
+            {CREDENTIALS.map(([title, meta]) => (
+              <div
+                key={title}
+                className="grid gap-1 border-b border-rule py-4 md:grid-cols-[1fr_1.4fr] md:gap-6"
+              >
+                <dt className="text-fg">{about(title)}</dt>
+                <dd className="text-sm text-muted md:text-base">{about(meta)}</dd>
               </div>
-            </motion.article>
-          )
-        })}
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   )

@@ -57,14 +57,12 @@ function formatClock(seconds?: number) {
 
 function PlayerBar({ player, clock }: { player: LichessGamePlayer; clock?: number }) {
   return (
-    <div className="flex items-center justify-between font-mono text-[11px] text-[var(--color-text-secondary)]">
+    <div className="flex items-center justify-between font-mono text-xs text-muted">
       <span className="truncate">
         {player.name}
-        {player.rating ? (
-          <span className="text-[var(--color-text-muted)]"> ({player.rating})</span>
-        ) : null}
+        {player.rating ? <span className="text-subtle"> ({player.rating})</span> : null}
       </span>
-      <span className="text-[var(--color-text-primary)]">{formatClock(clock)}</span>
+      <span className="text-fg">{formatClock(clock)}</span>
     </div>
   )
 }
@@ -74,9 +72,7 @@ export function LiveBoard({ gameId, username }: { gameId: string; username: stri
   const game = useLichessGame(gameId)
 
   if (!game) {
-    return (
-      <div className="aspect-square w-full animate-pulse rounded bg-[var(--color-surface-2)]" />
-    )
+    return <div className="aspect-square w-full animate-pulse rounded bg-raised" />
   }
 
   const flipped = game.black.name.toLowerCase() === username.toLowerCase()
@@ -101,7 +97,7 @@ export function LiveBoard({ gameId, username }: { gameId: string; username: stri
         viewBox="0 0 8 8"
         role="img"
         aria-label={t('live_game')}
-        className="w-full overflow-hidden rounded border border-[var(--color-border)]"
+        className="w-full overflow-hidden rounded border border-rule"
       >
         {Array.from({ length: 64 }, (_, i) => {
           const x = i % 8
@@ -115,8 +111,8 @@ export function LiveBoard({ gameId, username }: { gameId: string; username: stri
               height={1}
               fill={
                 (x + y) % 2 === 0
-                  ? 'var(--color-surface-2)'
-                  : 'color-mix(in srgb, var(--color-primary) 30%, var(--color-surface-2))'
+                  ? 'var(--bg-raised)'
+                  : 'color-mix(in srgb, var(--accent) 30%, var(--bg-raised))'
               }
             />
           )
@@ -130,7 +126,7 @@ export function LiveBoard({ gameId, username }: { gameId: string; username: stri
               y={y}
               width={1}
               height={1}
-              fill="var(--color-primary)"
+              fill="var(--accent)"
               opacity={0.45}
             />
           )

@@ -86,12 +86,42 @@ export interface ChessComStats {
   record?: ChessRecord
 }
 
+export type Localized<T> = Record<Locale, T>
+
+export type DiagramName = 'multi-market' | 'payments' | 'services' | 'lifecycle'
+
+export interface ProjectLink {
+  label: Localized<string>
+  href: string
+}
+
+export interface ProjectImage {
+  src: string
+  width: number
+  height: number
+  alt: Localized<string>
+}
+
 export interface Project {
   slug: string
   title: string
-  description: string
+  diagram: DiagramName
+  image?: ProjectImage
+  year: string
   stack: string[]
-  href?: string
-  image?: string
-  featured?: boolean
+  context: Localized<string>
+  summary: Localized<string>
+  role: Localized<string>
+  problem: Localized<string>
+  approach: Localized<string>
+  highlights: Localized<string[]>
+  outcome?: Localized<string>
+  links: ProjectLink[]
+}
+
+export interface AlsoProject {
+  title: string
+  year: string
+  context: Localized<string>
+  stack: string[]
 }

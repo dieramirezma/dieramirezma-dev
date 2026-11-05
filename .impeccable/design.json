@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-05T02:11:13.863077+00:00",
+  "title": "Design System: Diego Ramírez — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "vermilion": {
+        "role": "primary",
+        "displayName": "Vermilion Signal",
+        "canonical": "#ff5a2e",
+        "tonalRamp": [
+          "#40160c",
+          "#802d17",
+          "#bf4422",
+          "#ff5a2e",
+          "#ff8362",
+          "#ffac96",
+          "#ffcec0",
+          "#ffe6e0"
+        ]
+      },
+      "vermilion-light": {
+        "role": "primary",
+        "displayName": "Vermilion Signal (light)",
+        "canonical": "#c23a12",
+        "tonalRamp": [
+          "#320f05",
+          "#641e0a",
+          "#972e0f",
+          "#c23a12",
+          "#d66e4f",
+          "#e49e8a",
+          "#efc5b8",
+          "#f7e2dc"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0e0e0c",
+        "tonalRamp": [
+          "#040403",
+          "#070706",
+          "#0a0a09",
+          "#0e0e0c",
+          "#4a4a49",
+          "#868686",
+          "#b7b7b6",
+          "#dbdbdb"
+        ]
+      },
+      "bone": {
+        "role": "neutral",
+        "displayName": "Bone",
+        "canonical": "#ecebe5",
+        "tonalRamp": [
+          "#3b3b39",
+          "#767672",
+          "#b1b0ac",
+          "#ecebe5",
+          "#f1f0ec",
+          "#f6f5f2",
+          "#f9f9f7",
+          "#fcfcfb"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#f3f1ea",
+        "tonalRamp": [
+          "#3d3c3a",
+          "#7a7875",
+          "#b6b5b0",
+          "#f3f1ea",
+          "#f6f4ef",
+          "#f9f8f4",
+          "#fbfbf9",
+          "#fdfdfc"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#151513",
+        "tonalRamp": [
+          "#050505",
+          "#0a0a0a",
+          "#10100e",
+          "#151513",
+          "#50504e",
+          "#8a8a89",
+          "#b9b9b8",
+          "#dcdcdc"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#2a2925",
+        "tonalRamp": [
+          "#0a0a09",
+          "#151412",
+          "#201f1c",
+          "#2a2925",
+          "#5f5e5c",
+          "#949492",
+          "#bfbfbe",
+          "#dfdfde"
+        ]
+      },
+      "moss": {
+        "role": "semantic",
+        "displayName": "Moss",
+        "canonical": "#5fbf7a",
+        "tonalRamp": [
+          "#18301e",
+          "#30603d",
+          "#478f5c",
+          "#5fbf7a",
+          "#87cf9b",
+          "#afdfbc",
+          "#cfecd7",
+          "#e7f5eb"
+        ]
+      },
+      "ember": {
+        "role": "semantic",
+        "displayName": "Ember",
+        "canonical": "#f0705f",
+        "tonalRamp": [
+          "#3c1c18",
+          "#783830",
+          "#b45447",
+          "#f0705f",
+          "#f49487",
+          "#f8b8af",
+          "#fad4cf",
+          "#fdeae7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only; Sofia Sans Condensed 300, two lines on desktop."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Work section, featured project and Contact titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Company and project names; Sofia Sans Condensed 400."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Section labels (also the h2 of quiet sections), dates, stack lines, widget captions (12px floor)."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-out-quint-ish",
+        "value": "cubic-bezier(0.2, 0.7, 0.2, 1)",
+        "purpose": "Headline reveal and link underline growth."
+      },
+      {
+        "name": "state-transition",
+        "value": "200ms",
+        "purpose": "Button and chip color, background and border changes."
+      },
+      {
+        "name": "reveal-line",
+        "value": "700ms clip-path + translateY(0.4em)",
+        "purpose": "Hero headline entrance; collapses under prefers-reduced-motion."
+      },
+      {
+        "name": "theme-crossfade",
+        "value": "450ms view transition (root), 400ms color fallback",
+        "purpose": "Smooth light/dark switch; instant under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      },
+      {
+        "name": "container",
+        "value": "1320px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main action; fills vermilion on hover.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">View work</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;font-size:15px;font-weight:500;border:1px solid var(--fg,#ecebe5);border-radius:2px;font-family:Geist,system-ui,sans-serif;cursor:pointer;transition:background-color 200ms,color 200ms,border-color 200ms}.ds-btn-primary{background:#ecebe5;color:#0e0e0c}.ds-btn-primary:hover{background:#ff5a2e;border-color:#ff5a2e}.ds-btn:focus-visible{outline:2px solid #ff5a2e;outline-offset:3px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet alternate action with a strong hairline border.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Email</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;font-size:15px;font-weight:500;border:1px solid var(--fg,#ecebe5);border-radius:2px;font-family:Geist,system-ui,sans-serif;cursor:pointer;transition:background-color 200ms,color 200ms,border-color 200ms}.ds-btn-secondary{background:transparent;color:#ecebe5;border-color:#4a4842}.ds-btn-secondary:hover{border-color:#ecebe5}.ds-btn:focus-visible{outline:2px solid #ff5a2e;outline-offset:3px}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Non-interactive mono technology tag.",
+      "html": "<span class=\"ds-chip\">TypeScript</span>",
+      "css": ".ds-chip{display:inline-block;border:1px solid #2a2925;border-radius:2px;padding:2px 8px;font-family:'Geist Mono',ui-monospace,monospace;font-size:12px;color:#9a988f}"
+    },
+    {
+      "name": "Project Entry",
+      "kind": "custom",
+      "description": "Secondary project: mono context, display title, muted summary, mono stack.",
+      "html": "<a class=\"ds-row\" href=\"#\"><span class=\"ds-idx\">01</span><span><span class=\"ds-title\">FullStyle</span><span class=\"ds-ctx\">University team project</span><span class=\"ds-stack\">Next.js · TypeScript · Flask</span></span><span class=\"ds-yr\">2025</span></a>",
+      "css": ".ds-row{display:grid;grid-template-columns:3rem 1fr auto;gap:16px;align-items:baseline;padding:28px 0;border-top:1px solid #2a2925;border-bottom:1px solid #2a2925;color:#ecebe5;text-decoration:none}.ds-idx,.ds-yr{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#85837b}.ds-title{display:block;font-family:'Sofia Sans Condensed',system-ui,sans-serif;font-size:36px;line-height:1.1;letter-spacing:-.005em;transition:transform 300ms}.ds-row:hover .ds-title{transform:translateX(8px)}.ds-ctx{display:block;margin-top:8px;font-size:14px;color:#9a988f}.ds-stack{display:block;margin-top:12px;font-family:'Geist Mono',monospace;font-size:12px;color:#85837b}"
+    },
+    {
+      "name": "Section Label",
+      "kind": "custom",
+      "description": "Mono margin label beside a serif headline.",
+      "html": "<div><p class=\"ds-meta\">Experience</p><h2 class=\"ds-h2\">Production work</h2></div>",
+      "css": ".ds-meta{font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#85837b;margin:0 0 16px}.ds-h2{font-family:'Sofia Sans Condensed',system-ui,sans-serif;font-weight:300;font-size:48px;line-height:1.05;letter-spacing:-.005em;color:#ecebe5;margin:0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Engineer's Notebook",
+    "overview": "The site reads like a ruled technical notebook typeset by someone who cares about type: warm near-black ink (or warm paper in light mode), hairline rules instead of boxes, a plain mono label in the margin column, and one tall, narrow, light sans voice for headlines. Information is annotated rather than decorated: mono metadata labels, numbered index rows, and a single vermilion mark that shows where attention should go.\n\nThe mood is quiet, exact and product-engineering. Density is generous at the section level (large vertical rhythm) and tight within entries. Nothing glows, floats or gradients; hierarchy comes from the contrast between a light condensed display and small mono labels, and from rules that divide the page.\n\nThis system is the incumbent implementation in `src/app/globals.css`. The blue \"Kinetic Technical\" palette in CLAUDE.md is not what ships and is not part of this system.",
+    "keyCharacteristics": [
+      "Warm monochrome ink/paper with a single vermilion accent.",
+      "Light condensed display (Sofia Sans Condensed) over a neutral sans body (Geist) and mono labels (Geist Mono).",
+      "12-column editorial grid: a 3-column margin for labels, a 9-column main column.",
+      "Hairline rules and flat surfaces; no shadows, no gradients, no cards-as-boxes.",
+      "Dark is the primary theme; light is a true paper variant, not an inversion."
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Vermilion appears on a small fraction of any screen. Its rarity is the point; if two things on a screen are vermilion at rest, one of them is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Neutral Rule",
+        "body": "Neutrals are warm-tinted, never pure black or pure white or cool gray.",
+        "section": "colors"
+      },
+      {
+        "name": "The Quiet Headline Rule",
+        "body": "Only the hero, Work, the featured project and Contact get a display or headline-size title; every other section is announced by its mono label alone. Light weight (300) only at 2rem and above; titles below that use 400.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "No shadows or gradients. State changes are shown by color and border shifts, a link underline growing in, or a 2px–8px nudge.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "open sections with a mono label in the 3-column margin and, only where the section needs one, a light display headline in the main column. No section numbers.",
+      "use the vermilion accent sparingly, on emphasis, focus and hover only.",
+      "separate content with 1px rules rather than boxes or shadows.",
+      "show every focus state: a 2px vermilion outline with a 3px offset.",
+      "honor `prefers-reduced-motion` (animations and transitions collapse to near-zero).",
+      "crossfade theme changes: a 450ms view transition on the root, with a 400ms color/border transition as the fallback, and an instant switch under reduced motion.",
+      "keep stack lines and metadata in Geist Mono."
+    ],
+    "donts": [
+      "use the CLAUDE.md \"Kinetic Technical\" blue (`#3b82f6`) or pure black (`#000`) anywhere; they are not part of the shipped system.",
+      "add shadows, gradients, glows or rounded cards.",
+      "fill a section with decorative statistics, `Fig.` labels or filler labels; headline stat strips are not part of this system.",
+      "use more than one accent color.",
+      "use the display face below 1.25rem, set it in italic, or color a headline word with the accent.",
+      "reintroduce a serif; the system has no serif role."
+    ]
+  }
+}

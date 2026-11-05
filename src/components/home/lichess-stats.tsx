@@ -3,31 +3,17 @@
 import { useTranslations } from 'next-intl'
 import { Swords } from 'lucide-react'
 import { ActivityCard } from '@/components/ui/activity-card'
-import {
-  CardSkeleton,
-  ExtraStat,
-  RatingRow,
-  RecordBar,
-  Unavailable,
-} from '@/components/home/chess-parts'
+import { CardSkeleton, RatingList, Unavailable } from '@/components/home/chess-parts'
 import { LiveBoard } from '@/components/home/live-board'
 import { useLichessLive, useLichessStats } from '@/hooks/use-chess-stats'
-import type { ChessMode } from '@/types'
-
-const MODES: { key: ChessMode; label: string }[] = [
-  { key: 'bullet', label: 'Bullet' },
-  { key: 'blitz', label: 'Blitz' },
-  { key: 'rapid', label: 'Rapid' },
-  { key: 'classical', label: 'Classical' },
-]
 
 function LiveGame({ gameId, username }: { gameId: string; username: string }) {
   const t = useTranslations('activity')
 
   return (
     <div>
-      <p className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[var(--color-error)]">
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--color-error)]" />
+      <p className="mb-3 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.08em] text-success">
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-success" aria-hidden="true" />
         {t('live_game')}
       </p>
       <LiveBoard gameId={gameId} username={username} />
@@ -41,7 +27,7 @@ export function LichessStats() {
   const { data: live } = useLichessLive()
 
   return (
-    <ActivityCard icon={Swords} title="Lichess" href={data?.url}>
+    <ActivityCard icon={Swords} title="Lichess" href={data?.url} linkLabel={t('profile')}>
       {isLoading ? (
         <CardSkeleton />
       ) : !data ? (
@@ -51,19 +37,14 @@ export function LichessStats() {
           {live?.playing && live.gameId ? (
             <LiveGame gameId={live.gameId} username={data.username} />
           ) : null}
-          <div className="space-y-3">
-            {MODES.map(({ key, label }) => {
-              const rating = data.ratings[key]
-              return rating ? <RatingRow key={key} label={label} data={rating} /> : null
-            })}
-          </div>
-          {data.record ? <RecordBar record={data.record} /> : null}
-          <div className="flex gap-8">
-            {data.puzzle ? <ExtraStat label={t('puzzles')} value={data.puzzle} /> : null}
-            {data.hoursPlayed ? (
-              <ExtraStat label={t('hours_played')} value={data.hoursPlayed.toLocaleString()} />
-            ) : null}
-          </div>
+          <RatingList
+            ratings={[
+              { label: 'Rapid', data: data.ratings.rapid },
+              { label: 'Blitz', data: data.ratings.blitz },
+              { label: 'Bullet', data: data.ratings.bullet },
+              { label: 'Classical', data: data.ratings.classical },
+            ]}
+          />
         </>
       )}
     </ActivityCard>
