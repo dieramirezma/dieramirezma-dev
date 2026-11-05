@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
 import { getProject, PROJECTS } from '@/content/projects'
-import { Diagram } from '@/components/diagrams/diagrams'
+import { Diagram, diagramWidth } from '@/components/diagrams/diagrams'
 import { DiagramScroller } from '@/components/diagrams/diagram-scroller'
 import { Footer } from '@/components/layout/footer'
 import { Navbar } from '@/components/layout/navbar'
@@ -105,7 +105,10 @@ export default async function ProjectPage({ params }: { params: Params }) {
         ) : null}
 
         <figure className={`${project.image ? 'mt-6' : 'mt-12'} border border-rule p-6 md:p-10`}>
-          <DiagramScroller label={`${project.title}: ${t('diagram')}`}>
+          <DiagramScroller
+            label={`${project.title}: ${t('diagram')}`}
+            minWidth={diagramWidth(project.diagram)}
+          >
             <Diagram name={project.diagram} locale={locale} />
           </DiagramScroller>
           <figcaption className="meta mt-6">

@@ -52,21 +52,19 @@ interface NodeProps {
   label: string
   sub?: string
   accent?: boolean
+  muted?: boolean
 }
 
-export function Node({ x, y, w, h, label, sub, accent }: NodeProps) {
+export function Node({ x, y, w, h, label, sub, accent, muted }: NodeProps) {
   const cy = y + h / 2
+  const tone = accent
+    ? 'fill-bg stroke-accent'
+    : muted
+      ? 'fill-raised stroke-rule-strong'
+      : 'fill-bg stroke-rule-strong'
   return (
     <g>
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        rx={2}
-        className={accent ? 'fill-bg stroke-accent' : 'fill-bg stroke-rule-strong'}
-        strokeWidth={1.25}
-      />
+      <rect x={x} y={y} width={w} height={h} rx={2} className={tone} strokeWidth={1.25} />
       <text
         x={x + w / 2}
         y={sub ? cy - 4 : cy + 4.5}
@@ -125,21 +123,62 @@ interface EdgeProps {
   label?: string
   labelAt?: [number, number]
   anchor?: 'start' | 'middle' | 'end'
+  dashed?: boolean
 }
 
-export function Edge({ points, label, labelAt, anchor = 'middle' }: EdgeProps) {
+const CORNER = 8
+const CHAR = 7.2
+
+function roundedPath(points: [number, number][]) {
+  const [first, ...rest] = points
+  let d = `M${first[0]} ${first[1]}`
+  rest.forEach((point, i) => {
+    const next = rest[i + 1]
+    if (!next) {
+      d += ` L${point[0]} ${point[1]}`
+      return
+    }
+    const prev = points[i]
+    const inLen = Math.hypot(point[0] - prev[0], point[1] - prev[1])
+    const outLen = Math.hypot(next[0] - point[0], next[1] - point[1])
+    const r = Math.min(CORNER, inLen / 2, outLen / 2)
+    const before: [number, number] = [
+      point[0] - ((point[0] - prev[0]) / inLen) * r,
+      point[1] - ((point[1] - prev[1]) / inLen) * r,
+    ]
+    const after: [number, number] = [
+      point[0] + ((next[0] - point[0]) / outLen) * r,
+      point[1] + ((next[1] - point[1]) / outLen) * r,
+    ]
+    d += ` L${before[0]} ${before[1]} Q${point[0]} ${point[1]} ${after[0]} ${after[1]}`
+  })
+  return d
+}
+
+export function Edge({ points, label, labelAt, anchor = 'middle', dashed }: EdgeProps) {
   const marker = useContext(MarkerContext)
-  const d = points.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x} ${y}`).join(' ')
+  const maskWidth = label ? label.length * CHAR + 8 : 0
+  const maskX = labelAt
+    ? anchor === 'start'
+      ? labelAt[0] - 4
+      : anchor === 'end'
+        ? labelAt[0] - maskWidth + 4
+        : labelAt[0] - maskWidth / 2
+    : 0
   return (
     <g>
       <path
-        d={d}
+        d={roundedPath(points)}
         fill="none"
         stroke="currentColor"
         strokeWidth={1.25}
+        strokeDasharray={dashed ? '5 4' : undefined}
         className="text-muted"
         markerEnd={`url(#${marker})`}
       />
+      {label && labelAt ? (
+        <rect x={maskX} y={labelAt[1] - 12} width={maskWidth} height={16} className="fill-bg" />
+      ) : null}
       {label && labelAt ? (
         <text
           x={labelAt[0]}

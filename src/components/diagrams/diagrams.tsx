@@ -23,9 +23,21 @@ const T = {
     state: 'Payment state',
     stateSub: 'pending · confirmed · refunded',
     orders: 'orders',
-    frontend: 'Frontend',
-    services: 'Microservices',
-    service: 'service',
+    fsTitle: 'FullStyle architecture',
+    fsDesc:
+      'Web and Flutter clients enter through an Nginx proxy. Inside an internal Docker network, the Next.js web app calls an Apollo GraphQL gateway, which reaches a Go auth service and the Flask business API. The FastAPI chatbot acts through the business API with a delegated identity. Business rules and PostgreSQL are the authority; email leaves asynchronously from a PostgreSQL outbox through RabbitMQ.',
+    network: 'Internal Docker network',
+    clients: 'Clients',
+    proxy: 'proxy',
+    webApp: 'Web app',
+    authService: 'Auth service',
+    business: 'Business API',
+    truth: 'source of truth',
+    mail: 'Mail delivery',
+    delegated: 'delegated',
+    outbox: 'outbox',
+    legendAuthority: 'Authority: business rules and PostgreSQL',
+    legendAsync: 'Asynchronous',
     people: 'Team members',
     auth: 'Authentication',
     nursery: 'Nursery',
@@ -50,9 +62,21 @@ const T = {
     state: 'Estado del pago',
     stateSub: 'pendiente · confirmado · devuelto',
     orders: 'órdenes',
-    frontend: 'Frontend',
-    services: 'Microservicios',
-    service: 'servicio',
+    fsTitle: 'Arquitectura de FullStyle',
+    fsDesc:
+      'Los clientes web y Flutter entran por un proxy Nginx. Dentro de una red Docker interna, la web en Next.js llama a un gateway GraphQL con Apollo, que llega al servicio de autenticación en Go y a la API de negocio en Flask. El chatbot en FastAPI actúa a través de la API de negocio con una identidad delegada. Las reglas de negocio y PostgreSQL son la autoridad; el correo sale de forma asíncrona desde un outbox en PostgreSQL a través de RabbitMQ.',
+    network: 'Red Docker interna',
+    clients: 'Clientes',
+    proxy: 'proxy',
+    webApp: 'Web',
+    authService: 'Autenticación',
+    business: 'API de negocio',
+    truth: 'fuente de verdad',
+    mail: 'Envío de correo',
+    delegated: 'delegada',
+    outbox: 'outbox',
+    legendAuthority: 'Autoridad: reglas de negocio y PostgreSQL',
+    legendAsync: 'Asíncrono',
     people: 'Integrantes',
     auth: 'Autenticación',
     nursery: 'Vivero',
@@ -183,51 +207,113 @@ function Payments({ locale }: DiagramProps) {
   )
 }
 
-function Services({ locale }: DiagramProps) {
+function FullStyle({ locale }: DiagramProps) {
   const t = T[locale]
   return (
-    <DiagramFrame
-      width={700}
-      height={310}
-      title="Next.js → Go + Flask → PostgreSQL"
-      desc={`${t.frontend}: Next.js + NextAuth → ${t.services}: Go, Flask on Docker and Kubernetes / GKE → PostgreSQL; Flask ↔ Wompi`}
-    >
-      <Node x={20} y={118} w={150} h={56} label="Next.js" sub="NextAuth" />
-      <Group x={220} y={44} w={280} h={226} label="Docker · Kubernetes / GKE" />
-      <Node x={250} y={78} w={220} h={50} label={`Go ${t.service}`} />
-      <Node x={250} y={180} w={220} h={50} label={`Flask ${t.service}`} />
+    <DiagramFrame width={880} height={488} title={t.fsTitle} desc={t.fsDesc}>
+      <Group x={272} y={48} w={592} h={384} label={t.network} />
+
       <Edge
         points={[
-          [170, 135],
-          [200, 135],
-          [200, 103],
-          [250, 103],
+          [120, 196],
+          [152, 196],
         ]}
       />
       <Edge
         points={[
-          [170, 158],
-          [200, 158],
-          [200, 205],
-          [250, 205],
+          [248, 100],
+          [296, 100],
         ]}
       />
-      <Node x={550} y={180} w={130} h={50} label="PostgreSQL" />
       <Edge
         points={[
-          [470, 214],
-          [550, 214],
+          [370, 128],
+          [370, 168],
         ]}
       />
-      <Node x={550} y={78} w={130} h={50} label="Wompi" accent />
       <Edge
         points={[
-          [470, 190],
-          [520, 190],
-          [520, 103],
-          [550, 103],
+          [248, 244],
+          [540, 244],
+          [540, 224],
+        ]}
+        label="REST"
+        labelAt={[372, 264]}
+      />
+      <Edge
+        points={[
+          [248, 292],
+          [508, 292],
         ]}
       />
+      <Edge
+        points={[
+          [444, 180],
+          [476, 180],
+          [476, 100],
+          [508, 100],
+        ]}
+      />
+      <Edge
+        points={[
+          [444, 204],
+          [508, 204],
+        ]}
+      />
+      <Edge
+        points={[
+          [616, 264],
+          [616, 224],
+        ]}
+        label={t.delegated}
+        labelAt={[628, 248]}
+        anchor="start"
+      />
+      {[100, 196, 292].map(y => (
+        <Edge
+          key={y}
+          points={[
+            [660, y],
+            [724, y],
+          ]}
+        />
+      ))}
+      <Edge
+        points={[
+          [788, 320],
+          [788, 352],
+        ]}
+        label={t.outbox}
+        labelAt={[800, 340]}
+        anchor="start"
+        dashed
+      />
+
+      <Node x={16} y={168} w={104} h={56} label={t.clients} sub="Web · Flutter" muted />
+      <Node x={152} y={72} w={96} h={248} label="Nginx" sub={t.proxy} />
+      <Node x={296} y={72} w={148} h={56} label={t.webApp} sub="Next.js · NextAuth" />
+      <Node x={296} y={168} w={148} h={56} label="API gateway" sub="Apollo GraphQL" />
+      <Node x={508} y={72} w={152} h={56} label={t.authService} sub="Go · Gin" />
+      <Node x={508} y={168} w={152} h={56} label={t.business} sub="Flask · Redis cache" accent />
+      <Node x={508} y={264} w={152} h={56} label="Chatbot" sub="FastAPI" />
+      <Node x={724} y={72} w={128} h={248} label="PostgreSQL" sub={t.truth} accent />
+      <Node x={708} y={352} w={144} h={56} label={t.mail} sub="RabbitMQ · worker" />
+
+      <line x1={16} y1={448} x2={864} y2={448} className="stroke-rule" strokeWidth={1} />
+      <rect x={16} y={464} width={12} height={12} rx={2} className="fill-bg stroke-accent" />
+      <text x={36} y={474} className="fill-subtle font-mono" fontSize={12}>
+        {t.legendAuthority}
+      </text>
+      <Edge
+        points={[
+          [480, 470],
+          [512, 470],
+        ]}
+        dashed
+      />
+      <text x={524} y={474} className="fill-subtle font-mono" fontSize={12}>
+        {t.legendAsync}
+      </text>
     </DiagramFrame>
   )
 }
@@ -287,9 +373,15 @@ function Lifecycle({ locale }: DiagramProps) {
 const DIAGRAMS = {
   'multi-market': MultiMarket,
   payments: Payments,
-  services: Services,
+  services: FullStyle,
   lifecycle: Lifecycle,
 } satisfies Record<DiagramName, (props: DiagramProps) => React.ReactNode>
+
+const WIDTHS: Partial<Record<DiagramName, number>> = { services: 880 }
+
+export function diagramWidth(name: DiagramName) {
+  return WIDTHS[name] ?? 640
+}
 
 export function Diagram({ name, locale }: { name: DiagramName; locale: Locale }) {
   const Component = DIAGRAMS[name]

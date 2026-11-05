@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Link } from '@/i18n/navigation'
 import { ALSO, PROJECTS } from '@/content/projects'
-import { Diagram } from '@/components/diagrams/diagrams'
+import { Diagram, diagramWidth } from '@/components/diagrams/diagrams'
 import { DiagramScroller } from '@/components/diagrams/diagram-scroller'
 import type { Locale, Project } from '@/types'
 
@@ -78,7 +78,10 @@ function DiagramToggle({
       </button>
       {open ? (
         <div id={id} className={`mt-4 border border-rule p-3 ${wideOnDesktop ? 'lg:hidden' : ''}`}>
-          <DiagramScroller label={`${project.title}: ${t('diagram')}`}>
+          <DiagramScroller
+            label={`${project.title}: ${t('diagram')}`}
+            minWidth={diagramWidth(project.diagram)}
+          >
             <Diagram name={project.diagram} locale={locale} />
           </DiagramScroller>
           <p className="meta mt-3 sm:hidden">{t('scroll_hint')}</p>

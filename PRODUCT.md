@@ -51,7 +51,8 @@ Name: Diego Ramírez (full: Diego Nicolás Ramírez); logo wordmark is the serif
 - Résumés: `public/diego-ramirez-resume-en.pdf`, `public/diego-ramirez-resume-es.pdf`.
 - Project content in `src/content/` and routes under `src/app/[locale]/projects/`.
 - Project screenshots requested (none exist yet; add to `public/projects/` and set `image` in `src/content/projects.ts`, about 1600×1000 PNG/WebP): Dulce Berlín storefront or product page plus the Wompi checkout step; FullStyle booking/appointments screen plus dashboard; Gemalab traceability/lifecycle screen. Dapper gets none (confidential); its architecture diagram is the visual.
-- Absent and not to be fabricated: live URLs and repos for FullStyle / Gemalab / FoodRadar, screenshots, user counts, conversion/revenue/Lighthouse numbers, RestauManage verification.
+- FullStyle public monorepo (team project, modernized and consolidated by Diego, contributors credited): https://github.com/dieramirezma/fullstyle. Its README and `docs/architecture-review/` are the source for the case study and architecture diagram; the demo is local and synthetic, never a production deployment.
+- Absent and not to be fabricated: live URLs for FullStyle / Gemalab / FoodRadar, a FoodRadar repo, screenshots, user counts, conversion/revenue/Lighthouse numbers, RestauManage verification.
 
 ## Product Principles
 
