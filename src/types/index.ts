@@ -88,7 +88,9 @@ export interface ChessComStats {
 
 export type Localized<T> = Record<Locale, T>
 
-export type DiagramName = 'multi-market' | 'payments' | 'services' | 'lifecycle'
+export type DiagramName = 'multi-market' | 'payments' | 'services' | 'lifecycle' | 'realtime'
+
+export type DiagramScope = 'conceptual' | 'deployed'
 
 export interface ProjectLink {
   label: Localized<string>
@@ -105,7 +107,9 @@ export interface ProjectImage {
 export interface Project {
   slug: string
   title: string
+  featured?: boolean
   diagram: DiagramName
+  diagramScope?: DiagramScope
   image?: ProjectImage
   year: string
   stack: string[]

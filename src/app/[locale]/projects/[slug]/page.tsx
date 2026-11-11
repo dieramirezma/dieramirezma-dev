@@ -112,7 +112,8 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <Diagram name={project.diagram} locale={locale} />
           </DiagramScroller>
           <figcaption className="meta mt-6">
-            {t('diagram')} — {t('diagram_note')}
+            {t('diagram')} —{' '}
+            {project.diagramScope === 'deployed' ? t('diagram_note_deployed') : t('diagram_note')}
             <span className="sm:hidden"> {t('scroll_hint')}.</span>
           </figcaption>
         </figure>

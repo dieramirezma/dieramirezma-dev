@@ -111,11 +111,92 @@ function ProjectImageFigure({ project, locale, sizes }: ProjectImageProps) {
   )
 }
 
+interface FeaturedProjectProps {
+  project: Project
+  locale: Locale
+  open: boolean
+  onToggle: () => void
+  className: string
+}
+
+function FeaturedProject({ project, locale, open, onToggle, className }: FeaturedProjectProps) {
+  const t = useTranslations('work')
+  const { image } = project
+  return (
+    <article
+      className={`grid grid-cols-1 gap-8 border-t border-rule pt-8 xl:grid-cols-12 xl:gap-x-6 ${className}`}
+    >
+      <div className="min-w-0 xl:col-span-4">
+        <p className="meta">
+          {project.context[locale]}
+          {' '}· {project.year}
+        </p>
+        <h3 className="h2 mt-4">
+          <Link href={`/projects/${project.slug}`} className="hover:text-accent">
+            {project.title}
+          </Link>
+        </h3>
+        <p className="mt-5 max-w-[48ch] text-muted">{project.summary[locale]}</p>
+        <p className="mt-5 font-mono text-xs leading-relaxed text-subtle">
+          {project.stack.join(' · ')}
+        </p>
+        <div className="mt-6">
+          <ProjectLinks project={project} locale={locale} />
+        </div>
+        <DiagramToggle
+          project={project}
+          open={open}
+          onToggle={onToggle}
+          locale={locale}
+          className={image ? 'mt-4' : 'mt-4 md:hidden'}
+          wideOnDesktop={Boolean(image)}
+        />
+      </div>
+      {image ? (
+        <figure className="min-w-0 xl:col-span-8">
+          <Image
+            src={image.src}
+            width={image.width}
+            height={image.height}
+            alt={image.alt[locale]}
+            sizes="(min-width: 1280px) 58vw, 100vw"
+            className="h-auto w-full border border-rule"
+          />
+          <figcaption className="meta mt-3">{t('screenshot')}</figcaption>
+        </figure>
+      ) : (
+        <figure className="hidden md:block xl:col-span-8">
+          <div className="border border-rule p-6">
+            <div className="mx-auto max-w-[760px]">
+              <Diagram name={project.diagram} locale={locale} />
+            </div>
+          </div>
+          <figcaption className="meta mt-3">{t('diagram')}</figcaption>
+        </figure>
+      )}
+      {image && open ? (
+        <figure
+          id={`diagram-${project.slug}-wide`}
+          className="hidden border border-rule p-6 lg:block xl:col-span-12"
+        >
+          <div className="mx-auto max-w-[880px]">
+            <Diagram name={project.diagram} locale={locale} />
+          </div>
+          <figcaption className="meta mt-3">
+            {project.title} · {t('diagram')}
+          </figcaption>
+        </figure>
+      ) : null}
+    </article>
+  )
+}
+
 export function WorkIndex() {
   const t = useTranslations('work')
   const locale = useLocale() as Locale
   const [open, setOpen] = useState<string | null>(null)
-  const [featured, ...rest] = PROJECTS
+  const featured = PROJECTS.filter(project => project.featured)
+  const rest = PROJECTS.filter(project => !project.featured)
   const toggle = (slug: string) => setOpen(current => (current === slug ? null : slug))
   const openSecondary = rest.find(project => project.slug === open)
 
@@ -134,46 +215,16 @@ export function WorkIndex() {
           </div>
         </div>
 
-        <article className="mt-10 grid grid-cols-1 gap-8 border-t border-rule pt-8 md:mt-12 xl:grid-cols-12 xl:gap-x-6">
-          <div className="min-w-0 xl:col-span-4">
-            <p className="meta">
-              {featured.context[locale]}
-              {' '}· {featured.year}
-            </p>
-            <h3 className="h2 mt-4">
-              <Link href={`/projects/${featured.slug}`} className="hover:text-accent">
-                {featured.title}
-              </Link>
-            </h3>
-            <p className="mt-5 max-w-[48ch] text-muted">{featured.summary[locale]}</p>
-            <p className="mt-5 font-mono text-xs leading-relaxed text-subtle">
-              {featured.stack.join(' · ')}
-            </p>
-            <div className="mt-6">
-              <ProjectLinks project={featured} locale={locale} />
-            </div>
-            <DiagramToggle
-              project={featured}
-              open={open === featured.slug}
-              onToggle={() => toggle(featured.slug)}
-              locale={locale}
-              className="mt-4 md:hidden"
-            />
-          </div>
-          <figure className="hidden md:block xl:col-span-8">
-            <ProjectImageFigure
-              project={featured}
-              locale={locale}
-              sizes="(min-width: 1024px) 58vw, 100vw"
-            />
-            <div className={`border border-rule p-6 ${featured.image ? 'mt-4' : ''}`}>
-              <div className="mx-auto max-w-[760px]">
-                <Diagram name={featured.diagram} locale={locale} />
-              </div>
-            </div>
-            <figcaption className="meta mt-3">{t('diagram')}</figcaption>
-          </figure>
-        </article>
+        {featured.map((project, i) => (
+          <FeaturedProject
+            key={project.slug}
+            project={project}
+            locale={locale}
+            open={open === project.slug}
+            onToggle={() => toggle(project.slug)}
+            className={i === 0 ? 'mt-10 md:mt-12' : 'mt-12 md:mt-16'}
+          />
+        ))}
 
         <ol className="mt-12 grid grid-cols-1 gap-px border-y border-rule bg-rule md:mt-16 lg:grid-cols-3">
           {rest.map(project => (

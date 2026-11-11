@@ -40,6 +40,7 @@
     "case_study": "Case study",
     "repository": "Repository",
     "live": "Live site",
+    "screenshot": "Live site screenshot",
     "featured": "Featured"
   },
   "experience": {
@@ -129,6 +130,7 @@
     "repository": "Repository",
     "diagram": "Architecture sketch",
     "diagram_note": "Conceptual diagram; not the production architecture.",
+    "diagram_note_deployed": "Simplified view of the deployed architecture.",
     "previous": "Previous",
     "next": "Next",
     "scroll_hint": "Scroll sideways to see the full diagram"

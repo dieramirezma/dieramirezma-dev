@@ -4,6 +4,7 @@ export const PROJECTS: Project[] = [
   {
     slug: 'multi-market-platform',
     title: 'Multi-market platform',
+    featured: true,
     diagram: 'multi-market',
     year: '2025',
     stack: [
@@ -54,6 +55,87 @@ export const PROJECTS: Project[] = [
       es: 'La consolidación principal tomó cerca de un mes. En aproximadamente seis meses la plataforma pasó de 3 a más de 10 mercados latinoamericanos. Este caso es intencionalmente de alto nivel; los detalles de implementación son confidenciales.',
     },
     links: [],
+  },
+  {
+    slug: 'bus-tracking',
+    title: 'Bus Tracking',
+    featured: true,
+    diagram: 'realtime',
+    diagramScope: 'deployed',
+    image: {
+      src: '/projects/bus-tracking.png',
+      width: 1600,
+      height: 1000,
+      alt: {
+        en: 'The live map of Bogotá in dark mode: TransMilenio trunk routes in red and dual routes in green, each bus drawn as a dot along its corridor, with a panel counting 368 buses in operation.',
+        es: 'El mapa en vivo de Bogotá en modo oscuro: rutas troncales de TransMilenio en rojo y duales en verde, cada bus dibujado como un punto sobre su corredor, con un panel que cuenta 368 buses en operación.',
+      },
+    },
+    year: '2026',
+    stack: [
+      'Next.js',
+      'TypeScript',
+      'Fastify',
+      'MapLibre GL',
+      'GTFS Realtime',
+      'Cloudflare Pages',
+      'Render',
+      'GitHub Actions',
+      'Vitest',
+      'Turborepo',
+    ],
+    context: {
+      en: 'Personal project · Open data',
+      es: 'Proyecto personal · Datos abiertos',
+    },
+    summary: {
+      en: 'A live map of TransMilenio’s trunk and dual buses in Bogotá, with routes and stations, built on the open GTFS and GTFS Realtime data the operator publishes.',
+      es: 'Un mapa en vivo de los buses troncales y duales de TransMilenio en Bogotá, con sus rutas y estaciones, construido sobre los datos abiertos GTFS y GTFS Realtime que publica el operador.',
+    },
+    role: {
+      en: 'Solo project, end to end: data preprocessing, API, map frontend, tests, CI and deployment.',
+      es: 'Proyecto individual de extremo a extremo: preprocesamiento de datos, API, frontend del mapa, pruebas, CI y despliegue.',
+    },
+    problem: {
+      en: 'TransMilenio publishes bus positions as a GTFS Realtime protobuf feed, but a browser cannot read it: the feed sends no CORS headers and answers with Cross-Origin-Resource-Policy: same-origin. It carries 4,000+ vehicles, most of them not trunk buses, and no heading or speed.',
+      es: 'TransMilenio publica las posiciones de los buses como un feed protobuf GTFS Realtime, pero el navegador no puede leerlo: el feed no envía cabeceras CORS y responde con Cross-Origin-Resource-Policy: same-origin. Trae más de 4.000 vehículos, en su mayoría no troncales, y no incluye rumbo ni velocidad.',
+    },
+    approach: {
+      en: 'One small Fastify API is the only server: it polls the feed every 30 seconds, keeps the trunk and dual buses, derives each heading from consecutive positions and serves the snapshot from memory. The frontend is a static Next.js export on Cloudflare Pages that draws the buses with MapLibre over OpenFreeMap tiles and asks for /vehicles every 15 seconds. Routes and stations come from the static GTFS, preprocessed once a day into light JSON and GeoJSON.',
+      es: 'Un pequeño API en Fastify es el único servidor: consulta el feed cada 30 segundos, conserva los buses troncales y duales, calcula el rumbo de cada uno con posiciones consecutivas y entrega el resultado desde memoria. El frontend es un export estático de Next.js en Cloudflare Pages que dibuja los buses con MapLibre sobre tiles de OpenFreeMap y consulta /vehicles cada 15 segundos. Rutas y estaciones salen del GTFS estático, preprocesado una vez al día en JSON y GeoJSON livianos.',
+    },
+    highlights: {
+      en: [
+        'The API turns about 180 KB of protobuf with 4,000+ vehicles into about 20 KB gzipped with only the trunk buses.',
+        'Heading is computed between consecutive positions and only updated after a move of about 15 m, so GPS noise does not spin a stopped bus. Buses glide between readings unless the visitor prefers reduced motion.',
+        'A daily GitHub Action downloads the static GTFS (about 121 MB), streams its 578 MB stop_times file, simplifies route shapes with Douglas-Peucker and commits only when the data changed; Render and Cloudflare Pages redeploy from that commit.',
+        'Built for free tiers: the map detects a cold start and says the server is waking up, backs off on errors and stops polling while the tab is hidden. /health reports stale feeds and route IDs missing from the static GTFS.',
+        'The rate limit is keyed on Cloudflare’s CF-Connecting-IP, so a forged X-Forwarded-For cannot bypass it, and CORS only admits the site’s own origins.',
+        'CI checks formatting, types, Vitest tests against a recorded feed and the build on every pull request and push to main.',
+      ],
+      es: [
+        'El API reduce cerca de 180 KB de protobuf con más de 4.000 vehículos a unos 20 KB comprimidos con solo los buses troncales.',
+        'El rumbo se calcula entre posiciones consecutivas y solo se actualiza tras un movimiento de unos 15 m, para que el ruido del GPS no haga girar a un bus detenido. Los buses se desplazan suavemente entre lecturas, salvo que el visitante prefiera movimiento reducido.',
+        'Una GitHub Action diaria descarga el GTFS estático (cerca de 121 MB), procesa en streaming su archivo stop_times de 578 MB, simplifica los trazados con Douglas-Peucker y solo hace commit si los datos cambiaron; Render y Cloudflare Pages redespliegan a partir de ese commit.',
+        'Pensado para planes gratuitos: el mapa detecta el arranque en frío y avisa que el servidor está despertando, espacia los reintentos ante errores y deja de consultar con la pestaña oculta. /health reporta feeds desactualizados y route_id que faltan en el GTFS estático.',
+        'El rate limit usa el CF-Connecting-IP de Cloudflare, así que un X-Forwarded-For falso no sirve para saltárselo, y CORS solo admite los orígenes del propio sitio.',
+        'La CI revisa formato, tipos, pruebas con Vitest sobre un feed grabado y el build en cada pull request y push a main.',
+      ],
+    },
+    outcome: {
+      en: 'Live at bus-tracking.dieramirezma.dev on free tiers (Render, Cloudflare Pages, OpenFreeMap). The API sleeps after 15 minutes without traffic, so the first visit can take about a minute. Data © TRANSMILENIO S.A.',
+      es: 'En vivo en bus-tracking.dieramirezma.dev sobre planes gratuitos (Render, Cloudflare Pages, OpenFreeMap). El API se duerme tras 15 minutos sin tráfico, así que la primera visita puede tardar cerca de un minuto. Datos © TRANSMILENIO S.A.',
+    },
+    links: [
+      {
+        label: { en: 'Live site', es: 'Sitio en vivo' },
+        href: 'https://bus-tracking.dieramirezma.dev',
+      },
+      {
+        label: { en: 'Repository', es: 'Repositorio' },
+        href: 'https://github.com/dieramirezma/bus-tracking',
+      },
+    ],
   },
   {
     slug: 'dulce-berlin',
