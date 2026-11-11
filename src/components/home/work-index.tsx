@@ -101,7 +101,7 @@ function ProjectImageFigure({ project, locale, sizes }: ProjectImageProps) {
   if (!project.image) return null
   return (
     <Image
-      src={project.image.src}
+      src={project.image.src[locale]}
       width={project.image.width}
       height={project.image.height}
       alt={project.image.alt[locale]}
@@ -155,7 +155,7 @@ function FeaturedProject({ project, locale, open, onToggle, className }: Feature
       {image ? (
         <figure className="min-w-0 xl:col-span-8">
           <Image
-            src={image.src}
+            src={image.src[locale]}
             width={image.width}
             height={image.height}
             alt={image.alt[locale]}
