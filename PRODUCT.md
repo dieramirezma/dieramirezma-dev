@@ -50,8 +50,9 @@ Name: Diego Ramírez (full: Diego Nicolás Ramírez); logo wordmark is the serif
 - Approved experience bullets, skills tiers, education and copy bank in `diego_ramirez_portfolio_source_of_truth.md`.
 - Résumés: `public/diego-ramirez-resume-en.pdf`, `public/diego-ramirez-resume-es.pdf`.
 - Project content in `src/content/` and routes under `src/app/[locale]/projects/`.
-- Project screenshots requested (none exist yet; add to `public/projects/` and set `image` in `src/content/projects.ts`, about 1600×1000 PNG/WebP): Dulce Berlín storefront or product page plus the Wompi checkout step; FullStyle booking/appointments screen plus dashboard; Gemalab traceability/lifecycle screen. Dapper gets none (confidential); its architecture diagram is the visual.
+- Project screenshots (add to `public/projects/` and set `image` in `src/content/projects.ts`, about 1600×1000 PNG/WebP). Bus Tracking has one, captured from the live site. Still requested: Dulce Berlín storefront or product page plus the Wompi checkout step; FullStyle booking/appointments screen plus dashboard; Gemalab traceability/lifecycle screen. Dapper gets none (confidential); its architecture diagram is the visual.
 - FullStyle public monorepo (team project, modernized and consolidated by Diego, contributors credited): https://github.com/dieramirezma/fullstyle. Its README and `docs/architecture-review/` are the source for the case study and architecture diagram; the demo is local and synthetic, never a production deployment.
+- Bus Tracking (personal project, solo, 2026): live at https://bus-tracking.dieramirezma.dev, public repo https://github.com/dieramirezma/bus-tracking. Its README is the source for the case study and architecture diagram; figures used (30 s / 15 s polling, ~180 KB → ~20 KB, 4,000+ vehicles, ~121 MB GTFS.zip, 578 MB stop_times) come from the README and code. Shown as a second featured project because it is the only one with a live URL.
 - Absent and not to be fabricated: live URLs for FullStyle / Gemalab / FoodRadar, a FoodRadar repo, screenshots, user counts, conversion/revenue/Lighthouse numbers, RestauManage verification.
 
 ## Product Principles

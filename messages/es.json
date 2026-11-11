@@ -40,6 +40,7 @@
     "case_study": "Caso de estudio",
     "repository": "Repositorio",
     "live": "Sitio en vivo",
+    "screenshot": "Captura del sitio en vivo",
     "featured": "Destacado"
   },
   "experience": {
@@ -129,6 +130,7 @@
     "repository": "Repositorio",
     "diagram": "Esquema de arquitectura",
     "diagram_note": "Diagrama conceptual; no es la arquitectura de producción.",
+    "diagram_note_deployed": "Vista simplificada de la arquitectura desplegada.",
     "previous": "Anterior",
     "next": "Siguiente",
     "scroll_hint": "Desplázate hacia los lados para ver el diagrama completo"

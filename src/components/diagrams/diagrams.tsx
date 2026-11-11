@@ -44,6 +44,19 @@ const T = {
     planting: 'Planting',
     record: 'Traceability data',
     stages: 'Lifecycle stages',
+    rtTitle: 'Bus Tracking architecture',
+    rtDesc:
+      'A Fastify API on Render polls the TransMilenio GTFS Realtime feed every 30 seconds, keeps only trunk buses, derives their heading and holds the snapshot in memory; the browser asks it for /vehicles every 15 seconds. The browser loads the static Next.js site and the route and station GeoJSON from Cloudflare Pages and the map tiles from OpenFreeMap. A daily GitHub Action downloads GTFS.zip, rebuilds the data and triggers new deploys of the API and the site.',
+    vectorTiles: 'vector tiles',
+    browser: 'Browser',
+    apiNote: 'trunk only · heading · cache',
+    daily: 'daily · 05:00 Bogotá',
+    staticExport: 'static export',
+    tiles: 'tiles',
+    redeploy: 'redeploy',
+    rebuild: 'rebuild',
+    legendServer: 'The only server I run',
+    legendDaily: 'Daily data build',
   },
   es: {
     before: 'Antes',
@@ -83,6 +96,19 @@ const T = {
     planting: 'Siembra',
     record: 'Datos de trazabilidad',
     stages: 'Etapas del ciclo',
+    rtTitle: 'Arquitectura de Bus Tracking',
+    rtDesc:
+      'Un API en Fastify sobre Render consulta cada 30 segundos el feed GTFS Realtime de TransMilenio, conserva solo los buses troncales, calcula su rumbo y guarda el resultado en memoria; el navegador le pide /vehicles cada 15 segundos. El navegador carga el sitio estático de Next.js y el GeoJSON de rutas y estaciones desde Cloudflare Pages, y los tiles del mapa desde OpenFreeMap. Una GitHub Action diaria descarga GTFS.zip, regenera los datos y dispara nuevos despliegues del API y del sitio.',
+    vectorTiles: 'tiles vectoriales',
+    browser: 'Navegador',
+    apiNote: 'troncales · rumbo · caché',
+    daily: 'diario · 05:00 Bogotá',
+    staticExport: 'export estático',
+    tiles: 'tiles',
+    redeploy: 'redespliegue',
+    rebuild: 'rebuild',
+    legendServer: 'El único servidor propio',
+    legendDaily: 'Build diario de datos',
   },
 } as const
 
@@ -370,14 +396,118 @@ function Lifecycle({ locale }: DiagramProps) {
   )
 }
 
+function BusTracking({ locale }: DiagramProps) {
+  const t = T[locale]
+  return (
+    <DiagramFrame width={880} height={440} title={t.rtTitle} desc={t.rtDesc}>
+      <Edge
+        points={[
+          [168, 200],
+          [336, 200],
+        ]}
+        label="GTFS-RT · 30 s"
+        labelAt={[252, 188]}
+      />
+      <Edge
+        points={[
+          [568, 200],
+          [712, 200],
+        ]}
+        label="/vehicles · 15 s"
+        labelAt={[640, 188]}
+      />
+      <Edge
+        points={[
+          [788, 88],
+          [788, 172],
+        ]}
+        label={t.tiles}
+        labelAt={[776, 134]}
+        anchor="end"
+      />
+      <Edge
+        points={[
+          [788, 312],
+          [788, 228],
+        ]}
+        label="HTML · GeoJSON"
+        labelAt={[776, 274]}
+        anchor="end"
+      />
+      <Edge
+        points={[
+          [92, 228],
+          [92, 340],
+          [336, 340],
+        ]}
+        label="GTFS.zip"
+        labelAt={[214, 330]}
+        dashed
+      />
+      <Edge
+        points={[
+          [452, 312],
+          [452, 240],
+        ]}
+        label={t.redeploy}
+        labelAt={[464, 280]}
+        anchor="start"
+        dashed
+      />
+      <Edge
+        points={[
+          [568, 340],
+          [712, 340],
+        ]}
+        label={t.rebuild}
+        labelAt={[640, 330]}
+        dashed
+      />
+
+      <Node x={16} y={172} w={152} h={56} label="TransMilenio" sub="GTFS · GTFS-RT" muted />
+      <Node x={712} y={32} w={152} h={56} label="OpenFreeMap" sub={t.vectorTiles} muted />
+      <Node
+        x={336}
+        y={160}
+        w={232}
+        h={80}
+        label="API"
+        sub="Fastify · Render"
+        note={t.apiNote}
+        accent
+      />
+      <Node x={712} y={172} w={152} h={56} label={t.browser} sub="Next.js · MapLibre" />
+      <Node x={336} y={312} w={232} h={56} label="GitHub Actions" sub={t.daily} />
+      <Node x={712} y={312} w={152} h={56} label="Cloudflare Pages" sub={t.staticExport} />
+
+      <line x1={16} y1={400} x2={864} y2={400} className="stroke-rule" strokeWidth={1} />
+      <rect x={16} y={416} width={12} height={12} rx={2} className="fill-bg stroke-accent" />
+      <text x={36} y={426} className="fill-subtle font-mono" fontSize={12}>
+        {t.legendServer}
+      </text>
+      <Edge
+        points={[
+          [320, 422],
+          [352, 422],
+        ]}
+        dashed
+      />
+      <text x={364} y={426} className="fill-subtle font-mono" fontSize={12}>
+        {t.legendDaily}
+      </text>
+    </DiagramFrame>
+  )
+}
+
 const DIAGRAMS = {
   'multi-market': MultiMarket,
   payments: Payments,
   services: FullStyle,
   lifecycle: Lifecycle,
+  realtime: BusTracking,
 } satisfies Record<DiagramName, (props: DiagramProps) => React.ReactNode>
 
-const WIDTHS: Partial<Record<DiagramName, number>> = { services: 880 }
+const WIDTHS: Partial<Record<DiagramName, number>> = { services: 880, realtime: 880 }
 
 export function diagramWidth(name: DiagramName) {
   return WIDTHS[name] ?? 640

@@ -51,12 +51,13 @@ interface NodeProps {
   h: number
   label: string
   sub?: string
+  note?: string
   accent?: boolean
   muted?: boolean
 }
 
-export function Node({ x, y, w, h, label, sub, accent, muted }: NodeProps) {
-  const cy = y + h / 2
+export function Node({ x, y, w, h, label, sub, note, accent, muted }: NodeProps) {
+  const cy = y + h / 2 - (sub && note ? 8 : 0)
   const tone = accent
     ? 'fill-bg stroke-accent'
     : muted
@@ -83,6 +84,17 @@ export function Node({ x, y, w, h, label, sub, accent, muted }: NodeProps) {
           fontSize={12}
         >
           {sub}
+        </text>
+      ) : null}
+      {sub && note ? (
+        <text
+          x={x + w / 2}
+          y={cy + 30}
+          textAnchor="middle"
+          className="fill-subtle font-mono"
+          fontSize={12}
+        >
+          {note}
         </text>
       ) : null}
     </g>
