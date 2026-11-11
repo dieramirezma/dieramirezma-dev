@@ -94,7 +94,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
         {project.image ? (
           <Image
-            src={project.image.src}
+            src={project.image.src[locale]}
             width={project.image.width}
             height={project.image.height}
             alt={project.image.alt[locale]}

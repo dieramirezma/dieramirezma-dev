@@ -98,7 +98,7 @@ export interface ProjectLink {
 }
 
 export interface ProjectImage {
-  src: string
+  src: Localized<string>
   width: number
   height: number
   alt: Localized<string>
