@@ -6,6 +6,7 @@ import { Menu, X } from 'lucide-react'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { RESUME } from '@/lib/site'
 import { ThemeToggle } from '@/components/layout/theme-toggle'
+import { LogoMark } from '@/components/ui/logo-mark'
 
 const NAV_LINKS = [
   { key: 'experience', href: '/#experience' },
@@ -96,7 +97,8 @@ export function Navbar() {
         }`}
       >
         <nav className="page flex h-16 items-center justify-between" aria-label={t('primary')}>
-          <Link href="/" className="font-display text-xl text-fg">
+          <Link href="/" className="flex items-center gap-2.5 font-display text-xl text-fg">
+            <LogoMark className="size-7 shrink-0" />
             Diego Ramírez
           </Link>
 
